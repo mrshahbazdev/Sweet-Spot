@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Profile - Sweet Spot Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .radar-grid {
+            clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-primary/20 bg-background-light dark:bg-background-dark px-6 py-4 md:px-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center bg-primary text-white rounded-lg p-1.5">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">Customer Intelligence</h2>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export Report</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 py-8 md:px-10 max-w-7xl mx-auto w-full">
+<!-- Profile Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center gap-6">
+<div class="bg-primary/10 rounded-full p-1 border-2 border-primary/30">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24" data-alt="Professional corporate headshot of the customer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPtIuGM22BTXSufj0ZXHO_IpgoVHG6TjpwW2AyD5_YO3F1z0XiuzKuDThG5aUDIJP_QFv61Ih75rM9U3BgePK9WZEX_sDQ3F5KJWDqyVKJsjvrgic6F0CNPJ33kpuxCUX0vzPH7xcEWZ9E2OoTECwH9hNQFtzEy1PzedUvZutTWg_VHoJlHu1FN-UL1GcqAYkTv7jatauzITvA2UHVVZd3iezSydj9NIQNyjGJTPpRhDoxvEZfJeYKJi6jv_YUmasA_RsT8c0cUuY");'>
+</div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">{{DATA:INPUT:INPUT_1}}</h1>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">business</span> Key Account Manager</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">category</span> Tech Sector</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">tag</span> ID: #88291</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 items-end">
+<div class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full font-bold">
+<span class="material-symbols-outlined text-[20px]">workspace_premium</span>
+<span>Priority A Tier</span>
+</div>
+<p class="text-xs text-slate-400 font-medium">Last Assessment: Oct 24, 2023</p>
+</div>
+</div>
+<!-- KPIs Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/10 shadow-sm flex flex-col gap-1">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Overall Rank</p>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-white text-3xl font-bold">#4</p>
+<span class="text-emerald-500 text-sm font-bold flex items-center mb-1"><span class="material-symbols-outlined text-sm">trending_up</span>+2</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/10 shadow-sm flex flex-col gap-1">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Sweet Spot Score</p>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-white text-3xl font-bold">84/100</p>
+<span class="text-emerald-500 text-sm font-bold flex items-center mb-1"><span class="material-symbols-outlined text-sm">trending_up</span>+5%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/10 shadow-sm flex flex-col gap-1">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Marge pro Stunde</p>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-white text-3xl font-bold">€142.50</p>
+<span class="text-slate-400 text-sm font-bold flex items-center mb-1">Target: €130</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/10 shadow-sm flex flex-col gap-1">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Weighted Gesamtscore</p>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-white text-3xl font-bold">4.2</p>
+<div class="flex mb-1.5">
+<span class="material-symbols-outlined text-primary text-sm">star</span>
+<span class="material-symbols-outlined text-primary text-sm">star</span>
+<span class="material-symbols-outlined text-primary text-sm">star</span>
+<span class="material-symbols-outlined text-primary text-sm">star</span>
+<span class="material-symbols-outlined text-primary/30 text-sm">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Analysis Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<!-- Radar Chart Performance -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 p-8 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold">Criteria Performance</h3>
+<span class="text-sm text-primary font-semibold px-3 py-1 bg-primary/5 rounded-full">Sweet Spot Alignment</span>
+</div>
+<div class="relative flex justify-center py-6">
+<!-- Simulated Radar Chart Visualization -->
+<div class="relative h-64 w-64 md:h-80 md:w-80 border border-slate-200 dark:border-slate-800 rounded-full flex items-center justify-center">
+<!-- Radar Grids -->
+<div class="absolute h-full w-full border border-slate-100 dark:border-slate-800 rounded-full scale-75"></div>
+<div class="absolute h-full w-full border border-slate-100 dark:border-slate-800 rounded-full scale-50"></div>
+<div class="absolute h-full w-full border border-slate-100 dark:border-slate-800 rounded-full scale-25"></div>
+<!-- Radar Fill Shape -->
+<div class="absolute inset-4 bg-primary/20 border-2 border-primary" style="clip-path: polygon(50% 10%, 85% 25%, 90% 65%, 55% 90%, 15% 75%, 10% 35%, 25% 15%);"></div>
+<!-- Labels -->
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-bold uppercase tracking-wider">Chemistry</div>
+<div class="absolute top-1/4 -right-12 text-xs font-bold uppercase tracking-wider">Growth</div>
+<div class="absolute bottom-1/4 -right-12 text-xs font-bold uppercase tracking-wider">Profitability</div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-bold uppercase tracking-wider">Strategic Fit</div>
+<div class="absolute bottom-1/4 -left-12 text-xs font-bold uppercase tracking-wider">Scale</div>
+<div class="absolute top-1/4 -left-12 text-xs font-bold uppercase tracking-wider">Risk Sync</div>
+</div>
+</div>
+<!-- Legend/Labels Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 border-t border-slate-100 dark:border-slate-800 pt-6">
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-400 font-bold uppercase">Chemistry</span>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-400 font-bold uppercase">Growth</span>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 60%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-400 font-bold uppercase">Profitability</span>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-400 font-bold uppercase">Strategic Fit</span>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-400 font-bold uppercase">Scale</span>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs text-slate-400 font-bold uppercase">Risk Sync</span>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 70%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Stats & Evolution -->
+<div class="flex flex-col gap-8">
+<!-- Score Evolution Line Chart -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-primary/10 shadow-sm flex-1">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold mb-6">Historical Evolution</h3>
+<div class="flex flex-col justify-between h-[180px]">
+<div class="flex items-end gap-2 h-full px-2">
+<div class="flex-1 bg-primary/10 rounded-t-lg relative group h-[40%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">62</div>
+</div>
+<div class="flex-1 bg-primary/20 rounded-t-lg relative group h-[55%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">68</div>
+</div>
+<div class="flex-1 bg-primary/30 rounded-t-lg relative group h-[65%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">74</div>
+</div>
+<div class="flex-1 bg-primary/50 rounded-t-lg relative group h-[75%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">79</div>
+</div>
+<div class="flex-1 bg-primary rounded-t-lg relative group h-[84%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold opacity-100">84</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-slate-400 font-bold uppercase tracking-wider border-t border-slate-100 dark:border-slate-800 pt-2">
+<span>Q3-22</span>
+<span>Q4-22</span>
+<span>Q1-23</span>
+<span>Q2-23</span>
+<span>Q3-23</span>
+</div>
+</div>
+</div>
+<!-- Notes/Remarks Section -->
+<div class="bg-primary/5 dark:bg-primary/10 p-6 rounded-xl border-l-4 border-primary shadow-sm flex-1">
+<div class="flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined text-sm">notes</span>
+<h3 class="text-sm font-bold uppercase tracking-wider">Strategist Notes</h3>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                                "High chemistry scores due to the recent tech-refresh initiative. Growth potential remains untapped in the Nordic branch. Recommend upselling 'Cloud Synergy' package by Q1-24. High risk sync suggests long-term stability."
+                            </p>
+<div class="mt-6 flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-300" data-alt="Avatar of account strategist"></div>
+<span class="text-xs font-bold text-slate-500">Updated by Sarah Jenkins</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Summary -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-800 pt-6">
+<p class="text-sm text-slate-500">Comprehensive analysis powered by SweetSpot Engine v2.4</p>
+<div class="flex gap-4">
+<button class="text-sm font-semibold text-primary hover:underline">View Comparison</button>
+<button class="text-sm font-semibold text-primary hover:underline">Download Dataset</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

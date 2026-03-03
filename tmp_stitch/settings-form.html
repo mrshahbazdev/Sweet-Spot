@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scoring Settings - Sweet Spot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-background-dark/50">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined block text-2xl">target</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Sweet Spot</h2>
+</div>
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<div class="pb-4">
+<p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Admin Console</p>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">package_2</span>
+<span class="text-sm font-medium">Modules</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg cursor-pointer">
+<span class="material-symbols-outlined text-primary">settings_input_component</span>
+<span class="text-sm font-medium">Scoring Settings</span>
+</div>
+</div>
+<div class="pb-4">
+<p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Multi-tenant Config</p>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-sm font-medium">Tenants</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium">Global Reports</span>
+</div>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold truncate">Admin User</p>
+<p class="text-[10px] text-slate-500 truncate">SaaS Enterprise</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm">logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto flex flex-col">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-10 px-8 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 text-sm">Settings</span>
+<span class="material-symbols-outlined text-slate-300 text-sm">chevron_right</span>
+<span class="font-semibold text-sm">Scoring Weights</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                        Recalculate All Scores
+                    </button>
+</div>
+</header>
+<div class="p-8 max-w-4xl">
+<div class="mb-8">
+<h1 class="text-3xl font-extrabold tracking-tight mb-2">Scoring Settings</h1>
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-4 flex gap-4">
+<span class="material-symbols-outlined text-primary shrink-0">info</span>
+<div>
+<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                                Weights are used to prioritize specific business metrics. A higher weight (5) means the criterion has a significant impact on the final 'Sweet Spot' score, while a lower weight (1) minimizes its influence. Your changes will be applied to all existing records once you trigger a recalculation.
+                            </p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark/30 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800">
+<h2 class="text-lg font-bold">Criterion Weights</h2>
+<p class="text-xs text-slate-500">Adjust the relative importance of each metric</p>
+</div>
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Criterion Item -->
+<div class="px-6 py-6 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-semibold text-slate-900 dark:text-slate-100">Profitability</h3>
+<p class="text-sm text-slate-500">Margin per hour generated by the client or project.</p>
+</div>
+<div class="w-full md:w-64 flex items-center gap-4">
+<span class="text-xs font-bold text-slate-400 w-4 text-center">1</span>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range" value="5"/>
+<span class="text-xs font-bold text-primary w-4 text-center">5</span>
+</div>
+</div>
+<!-- Criterion Item -->
+<div class="px-6 py-6 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-semibold text-slate-900 dark:text-slate-100">Effort</h3>
+<p class="text-sm text-slate-500">The amount of operational strain and resource consumption.</p>
+</div>
+<div class="w-full md:w-64 flex items-center gap-4">
+<span class="text-xs font-bold text-slate-400 w-4 text-center">1</span>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range" value="3"/>
+<span class="text-xs font-bold text-primary w-4 text-center">3</span>
+</div>
+</div>
+<!-- Criterion Item -->
+<div class="px-6 py-6 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-semibold text-slate-900 dark:text-slate-100">Chemistry</h3>
+<p class="text-sm text-slate-500">Alignment with company culture and ease of communication.</p>
+</div>
+<div class="w-full md:w-64 flex items-center gap-4">
+<span class="text-xs font-bold text-slate-400 w-4 text-center">1</span>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range" value="4"/>
+<span class="text-xs font-bold text-primary w-4 text-center">4</span>
+</div>
+</div>
+<!-- Criterion Item -->
+<div class="px-6 py-6 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-semibold text-slate-900 dark:text-slate-100">Growth Potential</h3>
+<p class="text-sm text-slate-500">Likelihood of expanding the scope of work or budget.</p>
+</div>
+<div class="w-full md:w-64 flex items-center gap-4">
+<span class="text-xs font-bold text-slate-400 w-4 text-center">1</span>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range" value="2"/>
+<span class="text-xs font-bold text-primary w-4 text-center">2</span>
+</div>
+</div>
+<!-- Criterion Item -->
+<div class="px-6 py-6 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-semibold text-slate-900 dark:text-slate-100">Repeat Rate</h3>
+<p class="text-sm text-slate-500">Frequency of recurring purchases or renewed contracts.</p>
+</div>
+<div class="w-full md:w-64 flex items-center gap-4">
+<span class="text-xs font-bold text-slate-400 w-4 text-center">1</span>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range" value="4"/>
+<span class="text-xs font-bold text-primary w-4 text-center">4</span>
+</div>
+</div>
+<!-- Criterion Item -->
+<div class="px-6 py-6 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-semibold text-slate-900 dark:text-slate-100">Recommendations</h3>
+<p class="text-sm text-slate-500">Willingness to act as a case study or provide referrals.</p>
+</div>
+<div class="w-full md:w-64 flex items-center gap-4">
+<span class="text-xs font-bold text-slate-400 w-4 text-center">1</span>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range" value="3"/>
+<span class="text-xs font-bold text-primary w-4 text-center">3</span>
+</div>
+</div>
+<!-- Criterion Item -->
+<div class="px-6 py-6 flex flex-col md:flex-row md:items-center gap-6">
+<div class="flex-1">
+<h3 class="font-semibold text-slate-900 dark:text-slate-100">Payment Willingness</h3>
+<p class="text-sm text-slate-500">History of on-time payments and minimal budget friction.</p>
+</div>
+<div class="w-full md:w-64 flex items-center gap-4">
+<span class="text-xs font-bold text-slate-400 w-4 text-center">1</span>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="1" step="1" type="range" value="5"/>
+<span class="text-xs font-bold text-primary w-4 text-center">5</span>
+</div>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 flex items-center justify-between">
+<p class="text-xs text-slate-500 italic">Last modified by Admin on Oct 24, 2023</p>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-semibold border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800 transition-colors">Discard Changes</button>
+<button class="px-4 py-2 text-sm font-bold bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">Save Configuration</button>
+</div>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-6 bg-white dark:bg-background-dark/30 border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="flex items-center gap-3 mb-4 text-primary">
+<span class="material-symbols-outlined">analytics</span>
+<h3 class="font-bold">Score Distribution</h3>
+</div>
+<p class="text-sm text-slate-500 mb-4">Preview how these weights would affect your current tenant data.</p>
+<div class="h-32 w-full flex items-end gap-2">
+<div class="flex-1 bg-primary/20 rounded-t h-12"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-24"></div>
+<div class="flex-1 bg-primary/60 rounded-t h-20"></div>
+<div class="flex-1 bg-primary rounded-t h-32"></div>
+<div class="flex-1 bg-primary/50 rounded-t h-16"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-slate-400 font-bold">
+<span>0-20</span>
+<span>21-40</span>
+<span>41-60</span>
+<span>61-80</span>
+<span>81-100</span>
+</div>
+</div>
+<div class="p-6 bg-white dark:bg-background-dark/30 border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="flex items-center gap-3 mb-4 text-primary">
+<span class="material-symbols-outlined">hub</span>
+<h3 class="font-bold">Multi-tenant Sync</h3>
+</div>
+<p class="text-sm text-slate-500 mb-4">Choose whether to apply these global settings to all current tenants or just new ones.</p>
+<div class="space-y-3">
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary h-4 w-4" name="sync" type="radio"/>
+<span class="text-sm">Apply to all active tenants</span>
+</label>
+<label class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<input class="text-primary focus:ring-primary h-4 w-4" name="sync" type="radio"/>
+<span class="text-sm">Only new tenants (default)</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sweet Spot Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h1 class="font-bold text-lg leading-tight">Sweet Spot</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400">Strategic Analytics</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary text-white font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Customers</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined">target</span>
+<span>Scoring</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-slate-100 dark:bg-primary/5">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">person</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-semibold truncate">Alex Rivera</p>
+<p class="text-xs text-slate-500 truncate">Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="sticky top-0 z-10 flex items-center justify-between px-8 py-4 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-primary/20">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold">Customer Intelligence: Sweet Spot</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-primary/5 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search insights..." type="text"/>
+</div>
+<button class="size-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-primary/5 hover:bg-slate-200 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300">notifications</span>
+</button>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/20 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Customers</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold">12,840</h3>
+<span class="text-emerald-500 text-sm font-bold flex items-center">+12% <span class="material-symbols-outlined text-sm">trending_up</span></span>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/20 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Average Score</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold">78.5</h3>
+<span class="text-emerald-500 text-sm font-bold flex items-center">+3% <span class="material-symbols-outlined text-sm">trending_up</span></span>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/20 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Top Customers %</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold">15.2%</h3>
+<span class="text-rose-500 text-sm font-bold flex items-center">-1% <span class="material-symbols-outlined text-sm">trending_down</span></span>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/20 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Revenue</p>
+<div class="flex items-end justify-between mt-2">
+<h3 class="text-3xl font-bold">$4.2M</h3>
+<span class="text-emerald-500 text-sm font-bold flex items-center">+8% <span class="material-symbols-outlined text-sm">trending_up</span></span>
+</div>
+</div>
+</div>
+<!-- Main Analytics Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Quadrant Graph -->
+<div class="lg:col-span-8 bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/20 p-6 flex flex-col shadow-sm">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-lg font-bold">Profitability vs Effort</h3>
+<p class="text-sm text-slate-500">Resource allocation efficiency</p>
+</div>
+<div class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">OPTIMAL GROWTH ZONE</div>
+</div>
+<div class="relative flex-1 min-h-[400px] border-l border-b border-slate-300 dark:border-slate-700 m-8">
+<!-- Effort Axis Label -->
+<div class="absolute -left-12 top-1/2 -rotate-90 text-xs font-bold text-slate-400 uppercase tracking-widest">Profitability</div>
+<!-- Profitability Axis Label -->
+<div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-400 uppercase tracking-widest">Customer Effort</div>
+<!-- Quadrant Dividers -->
+<div class="absolute inset-0 flex">
+<div class="w-1/2 h-full border-r border-dashed border-slate-200 dark:border-slate-800"></div>
+</div>
+<div class="absolute inset-0 flex flex-col">
+<div class="h-1/2 w-full border-b border-dashed border-slate-200 dark:border-slate-800"></div>
+</div>
+<!-- Data Points (SVG) -->
+<div class="absolute inset-0">
+<!-- Example Bubbles -->
+<div class="absolute top-1/4 left-3/4 size-12 bg-primary/40 rounded-full border-2 border-primary flex items-center justify-center text-[10px] font-bold">Tier 1</div>
+<div class="absolute top-2/3 left-1/4 size-8 bg-slate-400/20 rounded-full border-2 border-slate-400/40"></div>
+<div class="absolute top-1/2 left-1/2 size-16 bg-primary/20 rounded-full border-2 border-primary/40 animate-pulse"></div>
+<div class="absolute top-1/3 left-1/3 size-6 bg-slate-400/20 rounded-full border-2 border-slate-400/40"></div>
+<div class="absolute top-0.5/4 left-0.5/4 size-10 bg-slate-400/20 rounded-full border-2 border-slate-400/40"></div>
+</div>
+</div>
+</div>
+<!-- Industry Breakdown -->
+<div class="lg:col-span-4 bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/20 p-6 shadow-sm">
+<h3 class="text-lg font-bold mb-6">Industry Breakdown</h3>
+<div class="space-y-6">
+<div class="relative pt-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium">Technology</span>
+<span class="text-xs font-bold text-primary">42%</span>
+</div>
+<div class="overflow-hidden h-2 text-xs flex rounded bg-slate-100 dark:bg-slate-800">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary" style="width:42%"></div>
+</div>
+</div>
+<div class="relative pt-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium">Financial Services</span>
+<span class="text-xs font-bold text-primary">28%</span>
+</div>
+<div class="overflow-hidden h-2 text-xs flex rounded bg-slate-100 dark:bg-slate-800">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary/70" style="width:28%"></div>
+</div>
+</div>
+<div class="relative pt-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium">Healthcare</span>
+<span class="text-xs font-bold text-primary">15%</span>
+</div>
+<div class="overflow-hidden h-2 text-xs flex rounded bg-slate-100 dark:bg-slate-800">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary/50" style="width:15%"></div>
+</div>
+</div>
+<div class="relative pt-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium">Manufacturing</span>
+<span class="text-xs font-bold text-primary">10%</span>
+</div>
+<div class="overflow-hidden h-2 text-xs flex rounded bg-slate-100 dark:bg-slate-800">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary/30" style="width:10%"></div>
+</div>
+</div>
+<div class="relative pt-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium">Other</span>
+<span class="text-xs font-bold text-primary">5%</span>
+</div>
+<div class="overflow-hidden h-2 text-xs flex rounded bg-slate-100 dark:bg-slate-800">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary/20" style="width:5%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-primary/5 rounded-xl border border-primary/10">
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+                                "Tech and Finance represent 70% of total revenue. Recommended focus: Upsell existing Healthcare accounts."
+                            </p>
+</div>
+</div>
+</div>
+<!-- Top Customers Table -->
+<div class="bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/20 overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-primary/20 flex justify-between items-center">
+<h3 class="text-lg font-bold">Top 10 Customers</h3>
+<button class="text-sm text-primary font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-primary/10 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+<tr>
+<th class="px-6 py-3">Rank</th>
+<th class="px-6 py-3">Customer Name</th>
+<th class="px-6 py-3">Industry</th>
+<th class="px-6 py-3">Score</th>
+<th class="px-6 py-3">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-primary/10">
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">#1</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Acme Corp logo" class="size-full object-cover" data-alt="Corporate logo for Acme Corp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ3orHZ9RwwPOsdRCfBVtIAQO0zhKsrNUV_BMQqx-wtOIyUiNlpJPtOo-6Ur_NIv858dvr_WZVjqfNg1wHQmREZ_b_sw9dxAoK5Oww6692hKNx7jVkbsQniCxzjAYjEH1lyIpfB7ce01jWzIN92cJb9Mc8F035jSyx_Q97iTn1XcBg1z5F7hQwOZGY4UiB6fKqpB1CxfGxJfT43-gN6pjSWbhcjK5YXRqxb6eh_Mv5r0yu4CaCMdkXDXU11Z1hPeG_8p3AI-ant5c"/>
+</div>
+<span class="font-medium">Acme Corporation</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Technology</td>
+<td class="px-6 py-4 font-bold">98.4</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded text-[10px] font-black bg-primary text-white">TOP</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">#2</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Globex logo" class="size-full object-cover" data-alt="Corporate logo for Globex Corp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDntCBAz8RBKuP6R70SEbXJ8iWVlQsfGOxf2KXZBpMtqm91rMAkNncE_wzTO7CrA9jhr9QkUMUJOu1w-qhOArJiiomT9yvpPIqB13Xa7YZoDLl1fMQV5wofrkoyZTSjfgbEOB51PymlyE4mdISWhh6F64C-t0uo6KVxkgNeMP6ULuaecKu-207o6t-jaji7L-omAnts0TQsJYAnR4H_JNyrQiU2pv6rzEj1ab8l4KT_xsIEC711KAk9psMQzP8RtbtV1Rdrrv-tDRQ"/>
+</div>
+<span class="font-medium">Globex Corp</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Financial Services</td>
+<td class="px-6 py-4 font-bold">96.2</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded text-[10px] font-black bg-primary text-white">TOP</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">#3</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Cyberdyne logo" class="size-full object-cover" data-alt="Corporate logo for Cyberdyne Systems" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSh5aoslUOWQJsUNSEnJRfFg8xqgT9uZMpVHCCuXCyvnPimSYxq2ckHIN7f8V3W22_MrvM7-8By1mE6T1J1ktS_qOcDJq8QS84j6Un6tZcjcU7nIAHe1DQ-dNrqhY00Pi92MTtFb5UEi4zjzox0_XWhe7vXrXSUijC8mo1TPbHnP7K-O_WaZCzcSUgIr14szjeYlhwnZ7cccERl7zuwhbJ2_rWdXF9pbwO08I15wrfbsXsqGT71p6-KLinsWq7_yB70QvLEe5g1fY"/>
+</div>
+<span class="font-medium">Cyberdyne Systems</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Technology</td>
+<td class="px-6 py-4 font-bold">95.8</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded text-[10px] font-black bg-primary text-white">TOP</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">#4</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Soylent logo" class="size-full object-cover" data-alt="Corporate logo for Soylent Corp" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqtCIo6_s9S0ekEv0-n5YnFasRRuiVOGnE-1_-sVYuwrLX4dQ9MXNJwxuQH7n8xtpOuyG5ewzuZg4gJOznqJvN7Zb7tRGJxMO_zib7JS7gEKH92DuN0g2PEX9PCPZqRB0lwZN42cO68tgwPxqHejoDuWR5o7CtkRunMubM7DHm9ADhuTw2NeuiZSts3kkcKyrbgYHjOFoapXmzxfj9FS7bupwdNHXvwhjukCN8KIdJDDblz3WfP8mrqQzTGajPPCZOaYJblUQC8YI"/>
+</div>
+<span class="font-medium">Soylent Corp</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Healthcare</td>
+<td class="px-6 py-4 font-bold">93.1</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded text-[10px] font-black bg-primary text-white">TOP</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">#5</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Initech logo" class="size-full object-cover" data-alt="Corporate logo for Initech" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpfg6IB8-wE6Wm6xfqlJP2CumlIe34mrvT2nwSD49fvq7DJoLzTT7YZbWtB4ZSKDAXygZ_ScKGlH01202OQomTC64ffG53fjMJCNWaqFOHkVVjByXF6F_FR5DxIqUiR1kDDC8xl3aq5CJUQkxzxPvxEWYdkxiOUVTQ6GCOTPWEm9q04OIHVKLDY6I-PjqF5bdOUlZLtxRk8xlBm8MDYV-la6rDy73ReKDNhm2UppNw2SP323MXdLc2pJr0ZE1ichO1P4fF9zHLOxA"/>
+</div>
+<span class="font-medium">Initech</span>
+</div>
+</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">Technology</td>
+<td class="px-6 py-4 font-bold">92.7</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded text-[10px] font-black bg-primary text-white">TOP</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
