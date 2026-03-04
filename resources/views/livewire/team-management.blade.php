@@ -99,23 +99,30 @@ new class extends Component {
 
     public function updateMember()
     {
-        $this->validate([
-            'editName' => 'required|string|max:255',
-            'editEmail' => 'required|email|unique:users,email,' . $this->editingUserId,
-            'editRole' => 'required|exists:roles,id',
-        ]);
-
         $user = User::findOrFail($this->editingUserId);
         if ($user->id !== auth()->id() && $user->parent_id !== auth()->id()) {
             return;
         }
 
-        $user->update([
-            'name' => $this->editName,
-            'email' => $this->editEmail,
-        ]);
+        // If it's a root user editing themselves, do not update their email and role 
+        if ($user->id === auth()->id() && is_null($user->parent_id)) {
+            $this->validate([
+                'editName' => 'required|string|max:255',
+            ]);
+            $user->update(['name' => $this->editName]);
+        } else {
+            $this->validate([
+                'editName' => 'required|string|max:255',
+                'editEmail' => 'required|email|unique:users,email,' . $this->editingUserId,
+                'editRole' => 'required|exists:roles,id',
+            ]);
 
-        $user->roles()->sync([$this->editRole]);
+            $user->update([
+                'name' => $this->editName,
+                'email' => $this->editEmail,
+            ]);
+            $user->roles()->sync([$this->editRole]);
+        }
 
         session()->flash('message', 'Member updated successfully.');
         $this->reset(['isEditModalOpen', 'editingUserId', 'editName', 'editEmail', 'editRole']);
@@ -373,15 +380,17 @@ new class extends Component {
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
                     <input wire:model="editEmail"
-                        class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        type="email" required />
+                        class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        type="email" required @if(auth()->id() === $editingUserId && is_null(auth()->user()->parent_id))
+                        disabled title="The main account email cannot be changed here." @endif />
                     @error('editEmail') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-2">Update Role</label>
                     <select wire:model="editRole"
-                        class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                        required>
+                        class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        required @if(auth()->id() === $editingUserId && is_null(auth()->user()->parent_id)) disabled
+                        title="The main account role cannot be changed." @endif>
                         <option value="">Select a role...</option>
                         @foreach($availableRoles as $role)
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
