@@ -159,8 +159,7 @@ new class extends Component {
                                     <span class="material-symbols-outlined text-sm">edit</span>
                                 </button>
                                 <button wire:click="confirmDelete({{ $customer->id }})"
-                                    class="text-slate-500 hover:text-red-500 transition"
-                                    title="Delete">
+                                    class="text-slate-500 hover:text-red-500 transition" title="Delete">
                                     <span class="material-symbols-outlined text-sm">delete</span>
                                 </button>
                             </td>
@@ -197,7 +196,7 @@ new class extends Component {
 
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Customer Name</label>
+                                    <label class="block text-sm font-medium text-gray-700">{{ __('Customer Name') }}</label>
                                     <input type="text" wire:model="name"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                                         required>
@@ -205,7 +204,7 @@ new class extends Component {
                                 </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Industry</label>
+                                    <label class="block text-sm font-medium text-gray-700">{{ __('Industry') }}</label>
                                     <input type="text" wire:model="industry"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
                                     @error('industry') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -213,17 +212,19 @@ new class extends Component {
 
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700">Revenue</label>
+                                        <label class="block text-sm font-medium text-gray-700">{{ __('Revenue') }}</label>
                                         <input type="number" step="0.01" wire:model="revenue"
                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700">Profit Margin (EUR)</label>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Profit Margin (EUR)') }}</label>
                                         <input type="number" step="0.01" wire:model="profit_margin_eur"
                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700">Effort (Hours)</label>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Effort (Hours)') }}</label>
                                         <input type="number" step="0.1" wire:model="effort_hours"
                                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
                                     </div>
@@ -233,11 +234,11 @@ new class extends Component {
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end gap-3">
                             <button type="button" wire:click="$set('isModalOpen', false)"
                                 class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
-                                Cancel
+                                {{ __('Cancel') }}
                             </button>
                             <button type="submit"
                                 class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
-                                Save Customer
+                                {{ __('Save Customer') }}
                             </button>
                         </div>
                     </form>
@@ -253,10 +254,12 @@ new class extends Component {
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
                     wire:click="$set('isDeleteModalOpen', false)"></div>
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-100">
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-100">
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                                 <span class="material-symbols-outlined text-red-600">warning</span>
                             </div>
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
