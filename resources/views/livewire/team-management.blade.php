@@ -150,26 +150,25 @@ new class extends Component {
 ?>
 
 <div>
-    @section('title', 'Team Management')
+    @section('title', __('Team Management'))
 
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div class="space-y-1">
-            <h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">Team Management
+            <h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">{{ __('Team Management') }}
             </h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg">Manage your team members, roles, and access
-                permissions.</p>
+            <p class="text-slate-500 dark:text-slate-400 text-lg">{{ __('Manage your team members, roles, and access permissions.') }}</p>
         </div>
         <button wire:click="$set('isInviteModalOpen', true)"
             class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-all shadow-lg shadow-primary/20">
             <span class="material-symbols-outlined text-lg">person_add</span>
-            Invite Member
+            {{ __('Invite Member') }}
         </button>
     </div>
 
     @if (session()->has('message'))
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-            <span class="font-medium">Success!</span> {{ session('message') }}
+            <span class="font-medium">{{ __('Success!') }}</span> {{ session('message') }}
         </div>
     @endif
 
@@ -181,7 +180,7 @@ new class extends Component {
                     <span class="material-symbols-outlined">group</span>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Total Members</p>
+                    <p class="text-sm font-medium text-slate-500 uppercase tracking-wider">{{ __('Total Members') }}</p>
                     <p class="text-3xl font-bold text-slate-900">{{ $totalMembers }}</p>
                 </div>
             </div>
@@ -192,7 +191,7 @@ new class extends Component {
                     <span class="material-symbols-outlined">admin_panel_settings</span>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Admins</p>
+                    <p class="text-sm font-medium text-slate-500 uppercase tracking-wider">{{ __('Admins') }}</p>
                     <p class="text-3xl font-bold text-slate-900">{{ $adminsCount }}</p>
                 </div>
             </div>
@@ -203,7 +202,7 @@ new class extends Component {
                     <span class="material-symbols-outlined">visibility</span>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-slate-500 uppercase tracking-wider">Viewers</p>
+                    <p class="text-sm font-medium text-slate-500 uppercase tracking-wider">{{ __('Viewers') }}</p>
                     <p class="text-3xl font-bold text-slate-900">{{ $viewersCount }}</p>
                 </div>
             </div>
@@ -215,17 +214,16 @@ new class extends Component {
         <div class="p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div class="flex items-center gap-4 overflow-x-auto pb-2 md:pb-0">
                 <button wire:click="$set('activeTab', 'all')"
-                    class="px-4 py-2 {{ $activeTab === 'all' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:bg-slate-100' }} text-sm font-bold rounded-full whitespace-nowrap transition-colors">All
-                    Members</button>
+                    class="px-4 py-2 {{ $activeTab === 'all' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:bg-slate-100' }} text-sm font-bold rounded-full whitespace-nowrap transition-colors">{{ __('All Members') }}</button>
                 <button wire:click="$set('activeTab', 'admins')"
-                    class="px-4 py-2 {{ $activeTab === 'admins' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:bg-slate-100' }} text-sm font-bold rounded-full transition-colors whitespace-nowrap">Admins</button>
+                    class="px-4 py-2 {{ $activeTab === 'admins' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:bg-slate-100' }} text-sm font-bold rounded-full transition-colors whitespace-nowrap">{{ __('Admins') }}</button>
             </div>
             <div class="relative min-w-[300px]">
                 <span
                     class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
                 <input wire:model.live="search"
                     class="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-primary/30 text-sm"
-                    placeholder="Search members by name or email..." type="text" />
+                    placeholder="{{ __('Search members by name or email...') }}" type="text" />
             </div>
         </div>
 
@@ -234,12 +232,12 @@ new class extends Component {
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-slate-50">
-                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Member</th>
-                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Role</th>
-                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Joined</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{{ __('Member') }}</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{{ __('Role') }}</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{{ __('Status') }}</th>
+                        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">{{ __('Joined') }}</th>
                         <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">
-                            Actions</th>
+                            {{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
@@ -262,13 +260,13 @@ new class extends Component {
                                     <span
                                         class="px-3 py-1 bg-{{ $role->name == 'Admin' ? 'blue' : 'slate' }}-100 text-{{ $role->name == 'Admin' ? 'blue' : 'slate' }}-600 text-xs font-bold rounded-full">{{ $role->name }}</span>
                                 @empty
-                                    <span class="text-xs text-slate-400">None</span>
+                                    <span class="text-xs text-slate-400">{{ __('None') }}</span>
                                 @endforelse
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-1.5">
                                     <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                    <span class="text-sm font-medium text-slate-700">Active</span>
+                                    <span class="text-sm font-medium text-slate-700">{{ __('Active') }}</span>
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-sm text-slate-500">{{ $member->created_at->diffForHumans() }}</td>
@@ -287,7 +285,7 @@ new class extends Component {
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-8 text-center text-slate-500">No members found.</td>
+                            <td colspan="5" class="px-6 py-8 text-center text-slate-500">{{ __('No members found.') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -306,8 +304,8 @@ new class extends Component {
                 <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-8 border border-slate-200">
                     <div class="flex justify-between items-start mb-6">
                         <div>
-                            <h3 class="text-2xl font-black text-slate-900 tracking-tight">Invite Member</h3>
-                            <p class="text-sm text-slate-500">Send an invitation to join your team.</p>
+                            <h3 class="text-2xl font-black text-slate-900 tracking-tight">{{ __('Invite Member') }}</h3>
+                            <p class="text-sm text-slate-500">{{ __('Send an invitation to join your team.') }}</p>
                         </div>
                         <button wire:click="$set('isInviteModalOpen', false)"
                             class="p-2 hover:bg-slate-100 rounded-full transition-colors">
@@ -317,18 +315,18 @@ new class extends Component {
 
                     <form wire:submit="sendInvite" class="space-y-6">
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">{{ __('Email Address') }}</label>
                             <input wire:model="inviteEmail"
                                 class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                                 placeholder="colleague@company.com" type="email" required />
                             @error('inviteEmail') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Assign Role</label>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">{{ __('Assign Role') }}</label>
                             <select wire:model="inviteRole"
                                 class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                                 required>
-                                <option value="">Select a role...</option>
+                                <option value="">{{ __('Select a role...') }}</option>
                                 @foreach($availableRoles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
@@ -336,16 +334,15 @@ new class extends Component {
                             @error('inviteRole') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
                         <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-slate-300">
-                            <p class="text-xs text-slate-500">Members will receive an email invitation to create an account and
-                                join this workspace.</p>
+                            <p class="text-xs text-slate-500">{{ __('Members will receive an email invitation to create an account and join this workspace.') }}</p>
                         </div>
                         <div class="flex gap-3 pt-2">
                             <button wire:click="$set('isInviteModalOpen', false)"
                                 class="flex-1 py-3 px-4 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
-                                type="button">Cancel</button>
+                                type="button">{{ __('Cancel') }}</button>
                             <button
                                 class="flex-1 py-3 px-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-                                type="submit">Send Invite</button>
+                                type="submit">{{ __('Send Invite') }}</button>
                         </div>
                     </form>
                 </div>
@@ -360,8 +357,8 @@ new class extends Component {
         <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-8 border border-slate-200">
             <div class="flex justify-between items-start mb-6">
                 <div>
-                    <h3 class="text-2xl font-black text-slate-900 tracking-tight">Edit Member</h3>
-                    <p class="text-sm text-slate-500">Modify member details and access level.</p>
+                    <h3 class="text-2xl font-black text-slate-900 tracking-tight">{{ __('Edit Member') }}</h3>
+                    <p class="text-sm text-slate-500">{{ __('Modify member details and access level.') }}</p>
                 </div>
                 <button wire:click="$set('isEditModalOpen', false)"
                     class="p-2 hover:bg-slate-100 rounded-full transition-colors">
@@ -371,27 +368,27 @@ new class extends Component {
 
             <form wire:submit="updateMember" class="space-y-6">
                 <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Name</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">{{ __('Name') }}</label>
                     <input wire:model="editName"
                         class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                         type="text" required />
                     @error('editName') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">{{ __('Email Address') }}</label>
                     <input wire:model="editEmail"
                         class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         type="email" required @if(auth()->id() === $editingUserId && is_null(auth()->user()->parent_id))
-                        disabled title="The main account email cannot be changed here." @endif />
+                        disabled title="{{ __('The main account email cannot be changed here.') }}" @endif />
                     @error('editEmail') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">Update Role</label>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">{{ __('Update Role') }}</label>
                     <select wire:model="editRole"
                         class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         required @if(auth()->id() === $editingUserId && is_null(auth()->user()->parent_id)) disabled
                         title="The main account role cannot be changed." @endif>
-                        <option value="">Select a role...</option>
+                        <option value="">{{ __('Select a role...') }}</option>
                         @foreach($availableRoles as $role)
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                         @endforeach
@@ -401,10 +398,10 @@ new class extends Component {
                 <div class="flex gap-3 pt-2">
                     <button wire:click="$set('isEditModalOpen', false)"
                         class="flex-1 py-3 px-4 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
-                        type="button">Cancel</button>
+                        type="button">{{ __('Cancel') }}</button>
                     <button
                         class="flex-1 py-3 px-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-                        type="submit">Update Member</button>
+                        type="submit">{{ __('Update Member') }}</button>
                 </div>
             </form>
         </div>
@@ -419,17 +416,16 @@ new class extends Component {
                 <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
                     <span class="material-symbols-outlined text-3xl">delete_forever</span>
                 </div>
-                <h3 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Remove Member?</h3>
-                <p class="text-slate-500 mb-8">This will immediately revoke their access to your workspace. This action
-                    cannot be undone.</p>
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight mb-2">{{ __('Remove Member?') }}</h3>
+                <p class="text-slate-500 mb-8">{{ __('This will immediately revoke their access to your workspace. This action cannot be undone.') }}</p>
 
                 <div class="flex gap-3 w-full">
                     <button wire:click="$set('isDeleteModalOpen', false)"
                         class="flex-1 py-3 px-4 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
-                        type="button">Cancel</button>
+                        type="button">{{ __('Cancel') }}</button>
                     <button wire:click="deleteMember"
                         class="flex-1 py-3 px-4 bg-red-500 text-white font-bold rounded-xl hover:bg-red-600 transition-all shadow-lg shadow-red-500/20"
-                        type="button">Yes, Remove</button>
+                        type="button">{{ __('Yes, Remove') }}</button>
                 </div>
             </div>
         </div>

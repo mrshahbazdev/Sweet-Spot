@@ -228,167 +228,166 @@ new class extends Component {
 
     <!-- Modal for Adding Customer -->
     @if($isModalOpen)
-            <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
-                        wire:click="$set('isModalOpen', false)"></div>
-                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                    <div
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                        <form wire:submit="save">
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title">
-                                    {{ $editingId ? __('Edit Customer') : __('Add New Customer') }}
-                                </h3>
+        <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                    wire:click="$set('isModalOpen', false)"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <form wire:submit="save">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4" id="modal-title">
+                                {{ $editingId ? __('Edit Customer') : __('Add New Customer') }}
+                            </h3>
 
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">{{ __('Customer Name') }}</label>
-                                        <input type="text" wire:model="name"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-                                            required>
-                                        @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                                    </div>
-
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">{{ __('Industry') }}</label>
-                                        <input type="text" wire:model="industry"
-                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                        @error('industry') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                                    </div>
-
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700">{{ __('Revenue') }}</label>
-                                            <input type="number" step="0.01" wire:model="revenue"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium text-gray-700">{{ __('Profit Margin (EUR)') }}</label>
-                                            <input type="number" step="0.01" wire:model="profit_margin_eur"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium text-gray-700">{{ __('Effort (Hours)') }}</label>
-                                            <input type="number" step="0.1" wire:model="effort_hours"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                        </div>
-                                    </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">{{ __('Customer Name') }}</label>
+                                    <input type="text" wire:model="name"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                                        required>
+                                    @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                                 </div>
 
-                                <div class="pt-4 mt-4 border-t border-gray-200">
-                                    <h4 class="text-sm font-bold text-gray-900 mb-4">{{ __('Subjective Evaluation') }}</h4>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">{{ __('Industry') }}</label>
+                                    <input type="text" wire:model="industry"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                    @error('industry') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                </div>
 
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium text-gray-700">{{ __('Chemistry Score') }}</label>
-                                            <select wire:model="chemistry_score"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                                <option value="1">1 - Poor</option>
-                                                <option value="2">2 - Below Average</option>
-                                                <option value="3">3 - Average</option>
-                                                <option value="4">4 - Good</option>
-                                                <option value="5">5 - Excellent</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium text-gray-700">{{ __('Growth Potential') }}</label>
-                                            <select wire:model="growth_score"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                                <option value="1">1 - None</option>
-                                                <option value="2">2 - Low</option>
-                                                <option value="3">3 - Moderate</option>
-                                                <option value="4">4 - High</option>
-                                                <option value="5">5 - Exceptional</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium text-gray-700">{{ __('Payment Willingness') }}</label>
-                                            <select wire:model="payment_willingness"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                                <option value="1">1 - Terrible</option>
-                                                <option value="2">2 - Slow</option>
-                                                <option value="3">3 - Standard</option>
-                                                <option value="4">4 - Prompt</option>
-                                                <option value="5">5 - Upfront/Excellent</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium text-gray-700">{{ __('Repeat Rate (%)') }}</label>
-                                            <input type="number" step="1" min="0" max="100" wire:model="repeat_rate"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                        </div>
-                                        <div>
-                                            <label
-                                                class="block text-sm font-medium text-gray-700">{{ __('Recommendations') }}</label>
-                                            <input type="number" step="1" min="0" wire:model="recommendations"
-                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
-                                        </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">{{ __('Revenue') }}</label>
+                                        <input type="number" step="0.01" wire:model="revenue"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Profit Margin (EUR)') }}</label>
+                                        <input type="number" step="0.01" wire:model="profit_margin_eur"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Effort (Hours)') }}</label>
+                                        <input type="number" step="0.1" wire:model="effort_hours"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end gap-3">
-                        <button type="button" wire:click="$set('isModalOpen', false)"
-                            class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
-                            {{ __('Cancel') }}
-                        </button>
-                        <button type="submit"
-                            class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
-                            {{ __('Save Customer') }}
-                        </button>
-                    </div>
+
+                            <div class="pt-4 mt-4 border-t border-gray-200">
+                                <h4 class="text-sm font-bold text-gray-900 mb-4">{{ __('Subjective Evaluation') }}</h4>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Chemistry Score') }}</label>
+                                        <select wire:model="chemistry_score"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                            <option value="1">1 - Poor</option>
+                                            <option value="2">2 - Below Average</option>
+                                            <option value="3">3 - Average</option>
+                                            <option value="4">4 - Good</option>
+                                            <option value="5">5 - Excellent</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Growth Potential') }}</label>
+                                        <select wire:model="growth_score"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                            <option value="1">1 - None</option>
+                                            <option value="2">2 - Low</option>
+                                            <option value="3">3 - Moderate</option>
+                                            <option value="4">4 - High</option>
+                                            <option value="5">5 - Exceptional</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Payment Willingness') }}</label>
+                                        <select wire:model="payment_willingness"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                            <option value="1">1 - Terrible</option>
+                                            <option value="2">2 - Slow</option>
+                                            <option value="3">3 - Standard</option>
+                                            <option value="4">4 - Prompt</option>
+                                            <option value="5">5 - Upfront/Excellent</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Repeat Rate (%)') }}</label>
+                                        <input type="number" step="1" min="0" max="100" wire:model="repeat_rate"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700">{{ __('Recommendations') }}</label>
+                                        <input type="number" step="1" min="0" wire:model="recommendations"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end gap-3">
+                            <button type="button" wire:click="$set('isModalOpen', false)"
+                                class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
+                                {{ __('Cancel') }}
+                            </button>
+                            <button type="submit"
+                                class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
+                                {{ __('Save Customer') }}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     @endif
 
-<!-- Modal for Deleting Customer -->
-@if($isDeleteModalOpen)
-    <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
-                wire:click="$set('isDeleteModalOpen', false)"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div
-                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-100">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div
-                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                            <span class="material-symbols-outlined text-red-600">warning</span>
-                        </div>
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                {{ __('Delete Customer') }}
-                            </h3>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-500">
-                                    {{ __('Are you sure you want to delete this customer? All of their data will be permanently removed. This action cannot be undone.') }}
-                                </p>
+    <!-- Modal for Deleting Customer -->
+    @if($isDeleteModalOpen)
+        <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                    wire:click="$set('isDeleteModalOpen', false)"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-100">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <span class="material-symbols-outlined text-red-600">warning</span>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                    {{ __('Delete Customer') }}
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        {{ __('Are you sure you want to delete this customer? All of their data will be permanently removed. This action cannot be undone.') }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end gap-3">
-                    <button type="button" wire:click="$set('isDeleteModalOpen', false)"
-                        class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
-                        {{ __('Cancel') }}
-                    </button>
-                    <button type="button" wire:click="delete"
-                        class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm">
-                        {{ __('Delete') }}
-                    </button>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end gap-3">
+                        <button type="button" wire:click="$set('isDeleteModalOpen', false)"
+                            class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
+                            {{ __('Cancel') }}
+                        </button>
+                        <button type="button" wire:click="delete"
+                            class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm">
+                            {{ __('Delete') }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endif
+    @endif
 </div>

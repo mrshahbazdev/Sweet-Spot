@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sweet Spot - Register</title>
+    <title>{{ __('Sweet Spot - Register') }}</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap"
@@ -47,12 +47,14 @@
                     <h1 class="text-2xl font-bold tracking-tight">Sweet Spot</h1>
                 </div>
                 <div class="max-w-md">
-                    <h2 class="text-5xl font-extrabold leading-tight mb-6">Empower your sweet business today.</h2>
-                    <p class="text-xl opacity-90 leading-relaxed">Join agencies and studios managing their ideal clients
-                        with Sweet Spot's intuitive tools.</p>
+                    <h2 class="text-5xl font-extrabold leading-tight mb-6">
+                        {{ __('Empower your sweet business today.') }}</h2>
+                    <p class="text-xl opacity-90 leading-relaxed">
+                        {{ __("Join agencies and studios managing their ideal clients with Sweet Spot's intuitive tools.") }}
+                    </p>
                 </div>
                 <div class="flex gap-4">
-                    <p class="text-sm font-medium self-center">Trusted by top-tier consultants</p>
+                    <p class="text-sm font-medium self-center">{{ __('Trusted by top-tier consultants') }}</p>
                 </div>
             </div>
         </div>
@@ -66,8 +68,10 @@
                 </div>
 
                 <div class="mb-10">
-                    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Create an account</h2>
-                    <p class="mt-2 text-slate-600 dark:text-slate-400">Start optimizing your client roster today.</p>
+                    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100">{{ __('Create an account') }}
+                    </h2>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400">
+                        {{ __('Start optimizing your client roster today.') }}</p>
                 </div>
 
                 <form method="POST" action="{{ route('register') }}" class="space-y-5">
@@ -76,8 +80,8 @@
                     <div class="grid grid-cols-1 gap-5">
                         <!-- Name -->
                         <label class="block">
-                            <span class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">Full
-                                Name</span>
+                            <span
+                                class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">{{ __('Full Name') }}</span>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined text-slate-400 text-lg">person</span>
@@ -85,15 +89,15 @@
                                 <input id="name"
                                     class="block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-slate-900 dark:text-slate-100"
                                     type="text" name="name" :value="old('name')" required autofocus autocomplete="name"
-                                    placeholder="John Doe" />
+                                    placeholder="{{ __('John Doe') }}" />
                             </div>
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </label>
 
                         <!-- Email -->
                         <label class="block">
-                            <span class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">Work
-                                Email</span>
+                            <span
+                                class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">{{ __('Work Email') }}</span>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined text-slate-400 text-lg">mail</span>
@@ -101,7 +105,7 @@
                                 <input id="email"
                                     class="block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-slate-900 dark:text-slate-100"
                                     type="email" name="email" :value="old('email')" required autocomplete="username"
-                                    placeholder="john@company.com" />
+                                    placeholder="{{ __('john@company.com') }}" />
                             </div>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </label>
@@ -109,7 +113,7 @@
                         <!-- Password -->
                         <label class="block">
                             <span
-                                class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">Password</span>
+                                class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">{{ __('Password') }}</span>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined text-slate-400 text-lg">lock</span>
@@ -122,11 +126,9 @@
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </label>
 
-                        <!-- Confirm Password -->
                         <label class="block">
                             <span
-                                class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">Confirm
-                                Password</span>
+                                class="text-sm font-semibold text-slate-700 dark:text-slate-300 ml-1 mb-1 block">{{ __('Confirm Password') }}</span>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined text-slate-400 text-lg">lock</span>
@@ -143,16 +145,16 @@
                     <div class="pt-4">
                         <button type="submit"
                             class="w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-xl text-base font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors shadow-lg shadow-primary/20">
-                            Create Account
+                            {{ __('Create Account') }}
                         </button>
                     </div>
                 </form>
 
                 <div class="mt-8 text-center">
                     <p class="text-slate-600 dark:text-slate-400">
-                        Already have an account?
-                        <a class="text-primary font-bold hover:underline ml-1" href="{{ route('login') }}">Log in
-                            here</a>
+                        {{ __('Already have an account?') }}
+                        <a class="text-primary font-bold hover:underline ml-1"
+                            href="{{ route('login') }}">{{ __('Log in here') }}</a>
                     </p>
                 </div>
             </div>

@@ -3,7 +3,7 @@
         <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
             <span class="material-symbols-outlined text-3xl text-primary">mark_email_read</span>
         </div>
-        <h2 class="text-2xl font-black text-slate-900 mb-2">Verify Your Email</h2>
+        <h2 class="text-2xl font-black text-slate-900 mb-2">{{ __('Verify Your Email') }}</h2>
         <p class="text-sm text-slate-500 leading-relaxed">
             {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
         </p>

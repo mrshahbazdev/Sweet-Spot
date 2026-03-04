@@ -100,7 +100,7 @@
                         <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">menu</span>
                     </button>
                     <h2 class="text-lg lg:text-xl font-bold truncate hidden sm:block">
-                        @yield('title', 'Customer Intelligence: Sweet Spot')</h2>
+                        @yield('title', __('Customer Intelligence: Sweet Spot'))</h2>
                     @isset($header)
                         <div class="ml-4 font-semibold text-lg lg:text-xl text-gray-800 leading-tight hidden md:block">
                             {{ $header }}

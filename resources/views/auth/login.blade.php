@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sweet Spot - Login</title>
+    <title>{{ __('Sweet Spot - Login') }}</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&display=swap"
@@ -51,9 +51,10 @@
                 </div>
                 <blockquote class="max-w-md">
                     <p class="text-2xl font-light leading-relaxed mb-6 italic opacity-90">
-                        "The intersection of data and intuition is where the sweetest business growth happens."
+                        {{ __('"The intersection of data and intuition is where the sweetest business growth happens."') }}
                     </p>
-                    <footer class="text-primary font-bold tracking-wide uppercase text-sm">— Sweet Spot Analytics
+                    <footer class="text-primary font-bold tracking-wide uppercase text-sm">
+                        {{ __('— Sweet Spot Analytics') }}
                     </footer>
                 </blockquote>
             </div>
@@ -70,9 +71,10 @@
                 </div>
 
                 <div class="mb-10">
-                    <h2 class="text-3xl font-black text-slate-900 dark:text-slate-100 mb-2">Welcome back</h2>
-                    <p class="text-slate-500 dark:text-slate-400">Log in to manage your business insights and sweeten
-                        your workflow.</p>
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-slate-100 mb-2">{{ __('Welcome back') }}
+                    </h2>
+                    <p class="text-slate-500 dark:text-slate-400">
+                        {{ __('Log in to manage your business insights and sweeten your workflow.') }}</p>
                 </div>
 
                 <!-- Session Status -->
@@ -83,8 +85,8 @@
 
                     <!-- Email Field -->
                     <div class="space-y-2">
-                        <label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="email">Email
-                            Address</label>
+                        <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+                            for="email">{{ __('Email Address') }}</label>
                         <div class="relative group">
                             <div
                                 class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 group-focus-within:text-primary">
@@ -93,7 +95,7 @@
                             <input id="email"
                                 class="w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white"
                                 type="email" name="email" :value="old('email')" required autofocus
-                                autocomplete="username" placeholder="e.g. alex@example.com" />
+                                autocomplete="username" placeholder="{{ __('e.g. alex@example.com') }}" />
                         </div>
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
@@ -102,10 +104,10 @@
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
                             <label class="text-sm font-semibold text-slate-700 dark:text-slate-300"
-                                for="password">Password</label>
+                                for="password">{{ __('Password') }}</label>
                             @if (Route::has('password.request'))
                                 <a class="text-sm font-semibold text-primary hover:underline"
-                                    href="{{ route('password.request') }}">Forgot password?</a>
+                                    href="{{ route('password.request') }}">{{ __('Forgot password?') }}</a>
                             @endif
                         </div>
                         <div class="relative group">
@@ -127,31 +129,31 @@
                             class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary dark:bg-slate-800 dark:border-slate-700"
                             name="remember" />
                         <label class="ml-3 block text-sm text-slate-600 dark:text-slate-400" for="remember_me">
-                            Remember me for 30 days
+                            {{ __('Remember me for 30 days') }}
                         </label>
                     </div>
 
                     <!-- Submit Button -->
                     <button type="submit"
                         class="w-full flex items-center justify-center py-4 px-4 bg-primary hover:bg-primary/90 text-white text-base font-bold rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
-                        Sign In
+                        {{ __('Sign In') }}
                     </button>
                 </form>
 
                 <!-- Registration Link -->
                 @if (Route::has('register'))
                     <p class="mt-10 text-center text-sm text-slate-500 dark:text-slate-400">
-                        Don't have an account?
-                        <a class="font-bold text-primary hover:underline" href="{{ route('register') }}">Start your free
-                            trial</a>
+                        {{ __("Don't have an account?") }}
+                        <a class="font-bold text-primary hover:underline"
+                            href="{{ route('register') }}">{{ __('Start your free trial') }}</a>
                     </p>
                 @endif
 
                 <footer
                     class="mt-12 flex justify-center gap-6 text-xs text-slate-400 uppercase tracking-widest font-medium">
-                    <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
-                    <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
-                    <a class="hover:text-primary transition-colors" href="#">Support</a>
+                    <a class="hover:text-primary transition-colors" href="#">{{ __('Privacy Policy') }}</a>
+                    <a class="hover:text-primary transition-colors" href="#">{{ __('Terms of Service') }}</a>
+                    <a class="hover:text-primary transition-colors" href="#">{{ __('Support') }}</a>
                 </footer>
             </div>
         </div>

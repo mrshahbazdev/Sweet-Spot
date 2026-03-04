@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Sweet Spot | Customer Intelligence Engine</title>
+    <title>{{ __('Sweet Spot | Customer Intelligence Engine') }}</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
@@ -95,31 +95,30 @@
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                         </span>
-                        New: Advanced Profitability Quadrants
+                        {{ __('New: Advanced Profitability Quadrants') }}
                     </div>
                     <h1
                         class="text-5xl lg:text-7xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">
                         {{ __('Identify Your Most') }} <span class="text-primary">{{ __('Profitable') }}</span>
-                        Customers
+                        {{ __('Customers') }}
                     </h1>
                     <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
-                        Sweet Spot's weighted scoring engine turns raw data into actionable insights, helping you focus
-                        on the clients that actually drive growth.
+                        {{ __("Sweet Spot's weighted scoring engine turns raw data into actionable insights, helping you focus on the clients that actually drive growth.") }}
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
                         @auth
                             <a href="{{ route('dashboard.sweetspot') }}"
                                 class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-lg flex items-center justify-center gap-2 w-fit">
-                                Go to Dashboard <span class="material-symbols-outlined">arrow_forward</span>
+                                {{ __('Go to Dashboard') }} <span class="material-symbols-outlined">arrow_forward</span>
                             </a>
                         @else
                             <a href="{{ route('register') }}"
                                 class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-lg flex items-center justify-center gap-2 w-fit">
-                                Start Free Trial <span class="material-symbols-outlined">arrow_forward</span>
+                                {{ __('Start Free Trial') }} <span class="material-symbols-outlined">arrow_forward</span>
                             </a>
                             <button
                                 class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white px-8 py-4 rounded-xl text-base font-bold transition-all hover:bg-slate-50 dark:hover:bg-slate-700">
-                                Book a Demo
+                                {{ __('Book a Demo') }}
                             </button>
                         @endauth
                     </div>
@@ -139,8 +138,8 @@
     <!-- Social Proof -->
     <section class="py-12 border-y border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-background-dark/30">
         <div class="max-w-7xl mx-auto px-4">
-            <p class="text-center text-sm font-semibold text-slate-500 uppercase tracking-widest mb-8">Trusted by
-                Industry Leaders</p>
+            <p class="text-center text-sm font-semibold text-slate-500 uppercase tracking-widest mb-8">
+                {{ __('Trusted by Industry Leaders') }}</p>
             <div
                 class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all">
                 <div class="flex items-center gap-2 text-xl font-bold"> <span
@@ -157,34 +156,34 @@
     <!-- Problem/Solution Section -->
     <section class="py-24 bg-background-light dark:bg-background-dark">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">Stop Guessing, Start Growing.
+            <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-6">
+                {{ __('Stop Guessing, Start Growing.') }}
             </h2>
             <p class="text-xl text-slate-600 dark:text-slate-400 mb-16 leading-relaxed">
-                Most agencies and B2B companies waste 40% of their time on clients that aren't profitable. Sweet Spot
-                transforms raw customer data into actionable rankings using specialized scores for profitability,
-                effort, and chemistry.
+                {{ __("Most agencies and B2B companies waste 40% of their time on clients that aren't profitable. Sweet Spot transforms raw customer data into actionable rankings using specialized scores for profitability, effort, and chemistry.") }}
             </p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div
                     class="p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700">
                     <div class="text-primary mb-4 flex justify-center"><span
                             class="material-symbols-outlined text-4xl">payments</span></div>
-                    <h3 class="font-bold text-lg mb-2">Profitability</h3>
-                    <p class="text-sm text-slate-500">Real-time tracking of revenue vs. resource cost.</p>
+                    <h3 class="font-bold text-lg mb-2">{{ __('Profitability') }}</h3>
+                    <p class="text-sm text-slate-500">{{ __('Real-time tracking of revenue vs. resource cost.') }}</p>
                 </div>
                 <div
                     class="p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700">
                     <div class="text-primary mb-4 flex justify-center"><span
                             class="material-symbols-outlined text-4xl">speed</span></div>
-                    <h3 class="font-bold text-lg mb-2">Effort</h3>
-                    <p class="text-sm text-slate-500">Measure account management hours and friction.</p>
+                    <h3 class="font-bold text-lg mb-2">{{ __('Effort') }}</h3>
+                    <p class="text-sm text-slate-500">{{ __('Measure account management hours and friction.') }}</p>
                 </div>
                 <div
                     class="p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700">
                     <div class="text-primary mb-4 flex justify-center"><span
                             class="material-symbols-outlined text-4xl">favorite</span></div>
-                    <h3 class="font-bold text-lg mb-2">Chemistry</h3>
-                    <p class="text-sm text-slate-500">Subjective alignment scores from your frontline team.</p>
+                    <h3 class="font-bold text-lg mb-2">{{ __('Chemistry') }}</h3>
+                    <p class="text-sm text-slate-500">{{ __('Subjective alignment scores from your frontline team.') }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -193,10 +192,12 @@
     <section class="py-24 bg-slate-50 dark:bg-slate-900/20" id="features">
         <div class="max-w-7xl mx-auto px-4">
             <div class="mb-16 text-left max-w-2xl">
-                <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-4">Powerful Features for Precise Growth
+                <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-4">
+                    {{ __('Powerful Features for Precise Growth') }}
                 </h2>
-                <p class="text-slate-600 dark:text-slate-400">Everything you need to master your customer portfolio and
-                    maximize your agency's efficiency.</p>
+                <p class="text-slate-600 dark:text-slate-400">
+                    {{ __("Everything you need to master your customer portfolio and maximize your agency's efficiency.") }}
+                </p>
             </div>
             <div class="grid lg:grid-cols-3 gap-6">
                 <!-- Feature 1 -->
@@ -207,9 +208,11 @@
                         <span class="material-symbols-outlined">tune</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Granular Scoring Engine</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Define custom weights on a 1-5
-                            scale for every metric to match your unique business goals and service model.</p>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                            {{ __('Granular Scoring Engine') }}</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            {{ __('Define custom weights on a 1-5 scale for every metric to match your unique business goals and service model.') }}
+                        </p>
                     </div>
                 </div>
                 <!-- Feature 2 -->
@@ -220,9 +223,10 @@
                         <span class="material-symbols-outlined">bubble_chart</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Advanced Analytics</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Visualize your portfolio with our
-                            Profitability vs. Effort quadrant and Top 10 rankings. See who to nurture and who to fire.
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ __('Advanced Analytics') }}
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            {{ __('Visualize your portfolio with our Profitability vs. Effort quadrant and Top 10 rankings. See who to nurture and who to fire.') }}
                         </p>
                     </div>
                 </div>
@@ -234,9 +238,11 @@
                         <span class="material-symbols-outlined">group</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Team Collaboration</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">Scale with confidence using
-                            granular roles and permissions. Collect data from account managers effortlessly.</p>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ __('Team Collaboration') }}
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            {{ __('Scale with confidence using granular roles and permissions. Collect data from account managers effortlessly.') }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -246,107 +252,95 @@
     <section class="py-24 bg-background-light dark:bg-background-dark" id="pricing">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-4">Simple, Transparent Pricing</h2>
-                <p class="text-slate-600 dark:text-slate-400">Scale your intelligence as your customer base grows.</p>
+                <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-4">
+                    {{ __('Simple, Transparent Pricing') }}</h2>
+                <p class="text-slate-600 dark:text-slate-400">
+                    {{ __('Scale your intelligence as your customer base grows.') }}</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Starter -->
                 <div
                     class="flex flex-col p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
                     <div class="mb-8">
-                        <h3 class="text-lg font-bold mb-2">Starter</h3>
+                        <h3 class="text-lg font-bold mb-2">{{ __('Starter') }}</h3>
                         <div class="flex items-baseline gap-1">
                             <span class="text-4xl font-black text-slate-900 dark:text-white">$49</span>
-                            <span class="text-slate-500">/mo</span>
+                            <span class="text-slate-500">{{ __('/mo') }}</span>
                         </div>
-                        <p class="text-sm text-slate-500 mt-2 italic">For growing small agencies</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">{{ __('For growing small agencies') }}</p>
                     </div>
                     <ul class="flex flex-col gap-4 mb-8 flex-1">
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Up to 20
-                            Clients
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Up to 20 Clients') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Basic
-                            Scoring Engine
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Basic Scoring Engine') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> 2 Team
-                            Members
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('2 Team Members') }}
                         </li>
                     </ul>
                     <button
-                        class="w-full py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Choose
-                        Starter</button>
+                        class="w-full py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">{{ __('Choose Starter') }}</button>
                 </div>
                 <!-- Pro -->
                 <div
                     class="flex flex-col p-8 rounded-3xl border-2 border-primary bg-white dark:bg-slate-900 relative shadow-xl transform scale-105">
                     <div
                         class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase">
-                        Most Popular</div>
+                        {{ __('Most Popular') }}</div>
                     <div class="mb-8">
-                        <h3 class="text-lg font-bold mb-2">Professional</h3>
+                        <h3 class="text-lg font-bold mb-2">{{ __('Professional') }}</h3>
                         <div class="flex items-baseline gap-1">
                             <span class="text-4xl font-black text-slate-900 dark:text-white">$149</span>
-                            <span class="text-slate-500">/mo</span>
+                            <span class="text-slate-500">{{ __('/mo') }}</span>
                         </div>
-                        <p class="text-sm text-slate-500 mt-2 italic">For performance-driven firms</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">{{ __('For performance-driven firms') }}</p>
                     </div>
                     <ul class="flex flex-col gap-4 mb-8 flex-1">
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Unlimited
-                            Clients
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Unlimited Clients') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Advanced
-                            Quadrant View
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Advanced Quadrant View') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> 10 Team
-                            Members
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('10 Team Members') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> CRM
-                            Integration
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('CRM Integration') }}
                         </li>
                     </ul>
                     <button
-                        class="w-full py-3 px-4 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">Get
-                        Started Now</button>
+                        class="w-full py-3 px-4 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">{{ __('Get Started Now') }}</button>
                 </div>
                 <!-- Enterprise -->
                 <div
                     class="flex flex-col p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
                     <div class="mb-8">
-                        <h3 class="text-lg font-bold mb-2">Enterprise</h3>
+                        <h3 class="text-lg font-bold mb-2">{{ __('Enterprise') }}</h3>
                         <div class="flex items-baseline gap-1">
                             <span class="text-4xl font-black text-slate-900 dark:text-white">$499</span>
-                            <span class="text-slate-500">/mo</span>
+                            <span class="text-slate-500">{{ __('/mo') }}</span>
                         </div>
-                        <p class="text-sm text-slate-500 mt-2 italic">For global enterprises</p>
+                        <p class="text-sm text-slate-500 mt-2 italic">{{ __('For global enterprises') }}</p>
                     </div>
                     <ul class="flex flex-col gap-4 mb-8 flex-1">
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Dedicated
-                            Account Manager
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Dedicated Account Manager') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Custom Data
-                            Processing
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Custom Data Processing') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Unlimited
-                            Teams
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Unlimited Teams') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> SSO &amp;
-                            Advanced Security
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('SSO & Advanced Security') }}
                         </li>
                     </ul>
                     <button
-                        class="w-full py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Contact
-                        Sales</button>
+                        class="w-full py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">{{ __('Contact Sales') }}</button>
                 </div>
             </div>
         </div>
@@ -360,10 +354,10 @@
                         <div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
                             <span class="material-symbols-outlined text-white text-xl">insights</span>
                         </div>
-                        <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Sweet Spot</span>
+                        <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ __('Sweet Spot') }}</span>
                     </div>
                     <p class="text-slate-500 dark:text-slate-400 text-sm max-w-xs mb-6">
-                        Leading customer intelligence for agencies who want to grow smarter, not just faster.
+                        {{ __('Leading customer intelligence for agencies who want to grow smarter, not just faster.') }}
                     </p>
                     <div class="flex gap-4">
                         <a class="h-10 w-10 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
@@ -377,37 +371,37 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-6 text-slate-900 dark:text-white">Product</h4>
+                    <h4 class="font-bold mb-6 text-slate-900 dark:text-white">{{ __('Product') }}</h4>
                     <ul class="flex flex-col gap-4 text-sm text-slate-500 dark:text-slate-400">
-                        <li><a class="hover:text-primary transition-colors" href="#">Features</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Analytics</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Integrations</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Features') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Analytics') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Integrations') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Pricing') }}</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-6 text-slate-900 dark:text-white">Company</h4>
+                    <h4 class="font-bold mb-6 text-slate-900 dark:text-white">{{ __('Company') }}</h4>
                     <ul class="flex flex-col gap-4 text-sm text-slate-500 dark:text-slate-400">
-                        <li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('About Us') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Careers') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Blog') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Contact') }}</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-6 text-slate-900 dark:text-white">Legal</h4>
+                    <h4 class="font-bold mb-6 text-slate-900 dark:text-white">{{ __('Legal') }}</h4>
                     <ul class="flex flex-col gap-4 text-sm text-slate-500 dark:text-slate-400">
-                        <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Privacy Policy') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Terms of Service') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Cookie Policy') }}</a></li>
                     </ul>
                 </div>
             </div>
             <div
                 class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-400">&copy; {{ date('Y') }} Sweet Spot Intelligence. All rights reserved.
+                <p class="text-xs text-slate-400">&copy; {{ date('Y') }} {{ __('Sweet Spot Intelligence. All rights reserved.') }}
                 </p>
-                <p class="text-xs text-slate-400">Handcrafted for elite agencies.</p>
+                <p class="text-xs text-slate-400">{{ __('Handcrafted for elite agencies.') }}</p>
             </div>
         </div>
     </footer>

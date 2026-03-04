@@ -1,12 +1,13 @@
 <x-app-layout>
-    @section('title', 'User Profile Settings')
+    @section('title', __('User Profile Settings'))
 
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div class="space-y-1">
-            <h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">Profile Settings
+            <h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                {{ __('Profile Settings') }}
             </h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg">Manage your account credentials and personal
-                preferences.</p>
+            <p class="text-slate-500 dark:text-slate-400 text-lg">
+                {{ __('Manage your account credentials and personal preferences.') }}</p>
         </div>
     </div>
 
