@@ -17,6 +17,12 @@ new class extends Component {
     public $profit_margin_eur = 0;
     public $effort_hours = 0;
 
+    public function create()
+    {
+        $this->reset(['name', 'industry', 'revenue', 'profit_margin_eur', 'effort_hours', 'editingId']);
+        $this->isModalOpen = true;
+    }
+
     public function edit($id)
     {
         $customer = Customer::findOrFail($id);
@@ -95,8 +101,7 @@ new class extends Component {
                         class="pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary w-64"
                         placeholder="{{ __('Search customers...') }}" type="text" />
                 </div>
-                <button
-                    wire:click="$set('isModalOpen', true); $set('editingId', null); reset('name', 'industry', 'revenue', 'profit_margin_eur', 'effort_hours')"
+                <button wire:click="create"
                     class="px-4 py-2 bg-primary text-white rounded-xl text-sm font-semibold hover:opacity-90 transition flex items-center gap-2">
                     <span class="material-symbols-outlined text-sm">add</span> {{ __('Add Customer') }}
                 </button>
