@@ -52,6 +52,8 @@
                         href="#pricing">{{ __('Pricing') }}</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors"
                         href="#about">{{ __('About') }}</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="{{ route('docs') }}">{{ __('Documentation') }}</a>
                     <select onchange="window.location.href=this.value"
                         class="bg-transparent border-none text-sm font-medium focus:ring-0 cursor-pointer">
                         <option value="{{ route('language.switch', 'en') }}" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>EN</option>
@@ -139,7 +141,8 @@
     <section class="py-12 border-y border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-background-dark/30">
         <div class="max-w-7xl mx-auto px-4">
             <p class="text-center text-sm font-semibold text-slate-500 uppercase tracking-widest mb-8">
-                {{ __('Trusted by Industry Leaders') }}</p>
+                {{ __('Trusted by Industry Leaders') }}
+            </p>
             <div
                 class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all">
                 <div class="flex items-center gap-2 text-xl font-bold"> <span
@@ -209,7 +212,8 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
-                            {{ __('Granular Scoring Engine') }}</h3>
+                            {{ __('Granular Scoring Engine') }}
+                        </h3>
                         <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
                             {{ __('Define custom weights on a 1-5 scale for every metric to match your unique business goals and service model.') }}
                         </p>
@@ -253,9 +257,11 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-4">
-                    {{ __('Simple, Transparent Pricing') }}</h2>
+                    {{ __('Simple, Transparent Pricing') }}
+                </h2>
                 <p class="text-slate-600 dark:text-slate-400">
-                    {{ __('Scale your intelligence as your customer base grows.') }}</p>
+                    {{ __('Scale your intelligence as your customer base grows.') }}
+                </p>
             </div>
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Starter -->
@@ -271,13 +277,16 @@
                     </div>
                     <ul class="flex flex-col gap-4 mb-8 flex-1">
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Up to 20 Clients') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('Up to 20 Clients') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Basic Scoring Engine') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('Basic Scoring Engine') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('2 Team Members') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('2 Team Members') }}
                         </li>
                     </ul>
                     <button
@@ -288,7 +297,8 @@
                     class="flex flex-col p-8 rounded-3xl border-2 border-primary bg-white dark:bg-slate-900 relative shadow-xl transform scale-105">
                     <div
                         class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase">
-                        {{ __('Most Popular') }}</div>
+                        {{ __('Most Popular') }}
+                    </div>
                     <div class="mb-8">
                         <h3 class="text-lg font-bold mb-2">{{ __('Professional') }}</h3>
                         <div class="flex items-baseline gap-1">
@@ -299,16 +309,20 @@
                     </div>
                     <ul class="flex flex-col gap-4 mb-8 flex-1">
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Unlimited Clients') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('Unlimited Clients') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Advanced Quadrant View') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('Advanced Quadrant View') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('10 Team Members') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('10 Team Members') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('CRM Integration') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('CRM Integration') }}
                         </li>
                     </ul>
                     <button
@@ -327,16 +341,20 @@
                     </div>
                     <ul class="flex flex-col gap-4 mb-8 flex-1">
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Dedicated Account Manager') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('Dedicated Account Manager') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Custom Data Processing') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('Custom Data Processing') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('Unlimited Teams') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('Unlimited Teams') }}
                         </li>
                         <li class="flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> {{ __('SSO & Advanced Security') }}
+                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                            {{ __('SSO & Advanced Security') }}
                         </li>
                     </ul>
                     <button
@@ -354,7 +372,8 @@
                         <div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
                             <span class="material-symbols-outlined text-white text-xl">insights</span>
                         </div>
-                        <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ __('Sweet Spot') }}</span>
+                        <span
+                            class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ __('Sweet Spot') }}</span>
                     </div>
                     <p class="text-slate-500 dark:text-slate-400 text-sm max-w-xs mb-6">
                         {{ __('Leading customer intelligence for agencies who want to grow smarter, not just faster.') }}
@@ -373,6 +392,8 @@
                 <div>
                     <h4 class="font-bold mb-6 text-slate-900 dark:text-white">{{ __('Product') }}</h4>
                     <ul class="flex flex-col gap-4 text-sm text-slate-500 dark:text-slate-400">
+                        <li><a class="hover:text-primary transition-colors"
+                                href="{{ route('docs') }}">{{ __('Documentation') }}</a></li>
                         <li><a class="hover:text-primary transition-colors" href="#">{{ __('Features') }}</a></li>
                         <li><a class="hover:text-primary transition-colors" href="#">{{ __('Analytics') }}</a></li>
                         <li><a class="hover:text-primary transition-colors" href="#">{{ __('Integrations') }}</a></li>
@@ -392,14 +413,16 @@
                     <h4 class="font-bold mb-6 text-slate-900 dark:text-white">{{ __('Legal') }}</h4>
                     <ul class="flex flex-col gap-4 text-sm text-slate-500 dark:text-slate-400">
                         <li><a class="hover:text-primary transition-colors" href="#">{{ __('Privacy Policy') }}</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Terms of Service') }}</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">{{ __('Terms of Service') }}</a>
+                        </li>
                         <li><a class="hover:text-primary transition-colors" href="#">{{ __('Cookie Policy') }}</a></li>
                     </ul>
                 </div>
             </div>
             <div
                 class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-400">&copy; {{ date('Y') }} {{ __('Sweet Spot Intelligence. All rights reserved.') }}
+                <p class="text-xs text-slate-400">&copy; {{ date('Y') }}
+                    {{ __('Sweet Spot Intelligence. All rights reserved.') }}
                 </p>
                 <p class="text-xs text-slate-400">{{ __('Handcrafted for elite agencies.') }}</p>
             </div>

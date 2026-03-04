@@ -19,6 +19,17 @@ Route::get('/language/{locale}', function ($locale) {
     return redirect()->back();
 })->name('language.switch');
 
+// Documentation Route (Public)
+Route::get('/docs', function () {
+    $locale = session('locale', config('app.locale'));
+    $path = base_path("docs/{$locale}.md");
+    if (!file_exists($path)) {
+        $path = base_path("docs/en.md");
+    }
+    $content = file_get_contents($path);
+    return view('docs', ['content' => \Illuminate\Support\Str::markdown($content)]);
+})->name('docs');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return redirect()->route('dashboard.sweetspot');
@@ -38,17 +49,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Documentation Route
-    Route::get('/docs', function () {
-        $locale = session('locale', config('app.locale'));
-        $path = base_path("docs/{$locale}.md");
-        if (!file_exists($path)) {
-            $path = base_path("docs/en.md");
-        }
-        $content = file_get_contents($path);
-        return view('docs', ['content' => \Illuminate\Support\Str::markdown($content)]);
-    })->name('docs');
 });
 
 require __DIR__ . '/auth.php';
