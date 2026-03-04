@@ -65,20 +65,22 @@ new class extends Component {
             <div class="flex justify-between items-center mb-8">
                 <div>
                     <h3 class="text-lg font-bold">{{ __('Profitability vs Effort') }}</h3>
-                    <p class="text-sm text-slate-500">Resource allocation efficiency</p>
+                    <p class="text-sm text-slate-500">{{ __('Resource allocation efficiency') }}</p>
                 </div>
-                <div class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">OPTIMAL GROWTH ZONE
-                </div>
+                <div class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">
+                    {{ __('OPTIMAL GROWTH ZONE') }}</div>
             </div>
             <div class="relative flex-1 min-h-[400px] border-l border-b border-slate-300 dark:border-slate-700 m-8">
                 <!-- Effort Axis Label -->
                 <div
                     class="absolute -left-12 top-1/2 -rotate-90 text-xs font-bold text-slate-400 uppercase tracking-widest">
-                    Profitability</div>
+                    {{ __('Profitability') }}
+                </div>
                 <!-- Profitability Axis Label -->
                 <div
                     class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-bold text-slate-400 uppercase tracking-widest">
-                    Customer Effort</div>
+                    {{ __('Customer Effort') }}
+                </div>
 
                 <!-- Quadrant Dividers -->
                 <div class="absolute inset-0 flex">
@@ -119,7 +121,7 @@ new class extends Component {
         <!-- Industry Breakdown -->
         <div
             class="lg:col-span-4 bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/20 p-6 shadow-sm">
-            <h3 class="text-lg font-bold mb-6">Industry Breakdown</h3>
+            <h3 class="text-lg font-bold mb-6">{{ __('Industry Breakdown') }}</h3>
             <div class="space-y-6">
                 @php
                     // Aggregate customer counts by industry
@@ -138,7 +140,7 @@ new class extends Component {
                     @endphp
                     <div class="relative pt-1">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm font-medium">{{ $industryData->industry ?? 'Other' }}</span>
+                            <span class="text-sm font-medium">{{ $industryData->industry ?? __('Other') }}</span>
                             <span class="text-xs font-bold text-primary">{{ $percentage }}%</span>
                         </div>
                         <div class="overflow-hidden h-2 text-xs flex rounded bg-slate-100 dark:bg-slate-800">
@@ -148,13 +150,13 @@ new class extends Component {
                     </div>
                 @endforeach
                 @if($industries->isEmpty())
-                    <p class="text-sm text-slate-500 text-center py-8">No industry data available yet.</p>
+                    <p class="text-sm text-slate-500 text-center py-8">{{ __('No industry data available yet.') }}</p>
                 @endif
             </div>
 
             <div class="mt-8 p-4 bg-primary/5 rounded-xl border border-primary/10">
                 <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
-                    "Industry focus based on current customer base."
+                    {{ __('"Industry focus based on current customer base."') }}
                 </p>
             </div>
         </div>
@@ -195,7 +197,7 @@ new class extends Component {
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-8 text-center text-slate-500">
-                                No scored customers found. Adjust weights and recalculate to see top customers.
+                                {{ __('No scored customers found. Adjust weights and recalculate to see top customers.') }}
                             </td>
                         </tr>
                     @endforelse

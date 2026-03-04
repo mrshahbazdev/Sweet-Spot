@@ -95,38 +95,36 @@ new class extends Component {
 ?>
 
 <div>
-    @section('title', 'Role Management')
+    @section('title', __('Role Management'))
 
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div class="space-y-1">
-            <h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">Roles &
-                Permissions</h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg">Define custom roles and configure granular access
-                permissions.</p>
+            <h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">{{ __('Roles & Permissions') }}</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg">{{ __('Define custom roles and configure granular access permissions.') }}</p>
         </div>
         <button wire:click="openCreateModal"
             class="flex items-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all shadow-lg">
             <span class="material-symbols-outlined text-lg">add_security</span>
-            Create Custom Role
+            {{ __('Create Custom Role') }}
         </button>
     </div>
 
     @if (session()->has('message'))
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-            <span class="font-medium">Success!</span> {{ session('message') }}
+            <span class="font-medium">{{ __('Success!') }}</span> {{ session('message') }}
         </div>
     @endif
     @if (session()->has('error'))
         <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-            <span class="font-medium">Error!</span> {{ session('error') }}
+            <span class="font-medium">{{ __('Error!') }}</span> {{ session('error') }}
         </div>
     @endif
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Roles List (Sidebar) -->
         <div class="lg:col-span-1 space-y-4">
-            <h3 class="font-bold text-slate-900 text-lg mb-2">Available Roles</h3>
+            <h3 class="font-bold text-slate-900 text-lg mb-2">{{ __('Available Roles') }}</h3>
 
             @foreach($roles as $role)
                 <div class="bg-white rounded-xl border {{ $editingRole && $editingRole->id === $role->id ? 'border-primary ring-1 ring-primary' : 'border-slate-200 hover:border-slate-300' }} p-5 shadow-sm transition-all cursor-pointer relative group"
@@ -145,7 +143,7 @@ new class extends Component {
                         <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             @if($role->name !== 'Admin' && $role->users_count === 0)
                                 <button wire:click.stop="deleteRole({{ $role->id }})"
-                                    wire:confirm="Delete this role? This action cannot be undone."
+                                    wire:confirm="{{ __('Delete this role? This action cannot be undone.') }}"
                                     class="text-slate-400 hover:text-red-500 p-1">
                                     <span class="material-symbols-outlined text-sm">delete</span>
                                 </button>
@@ -153,13 +151,13 @@ new class extends Component {
                         </div>
                     </div>
 
-                    <p class="text-sm text-slate-500 mb-4">{{ $role->description ?: 'No description provided.' }}</p>
+                    <p class="text-sm text-slate-500 mb-4">{{ $role->description ?: __('No description provided.') }}</p>
 
                     <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-100 pt-3">
                         <span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">group</span>
-                            {{ $role->users_count }} users</span>
+                            {{ $role->users_count }} {{ __('users') }}</span>
                         <span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">key</span>
-                            {{ $role->permissions->count() }} rules</span>
+                            {{ $role->permissions->count() }} {{ __('rules') }}</span>
                     </div>
                 </div>
             @endforeach
@@ -171,28 +169,27 @@ new class extends Component {
                 <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
                     <div class="bg-slate-50 p-6 border-b border-slate-200">
                         <h3 class="text-xl font-bold text-slate-900">
-                            {{ $editingRole ? 'Edit Role: ' . $editingRole->name : 'Create New Role' }}</h3>
-                        <p class="text-sm text-slate-500">Configure core details and granular access permissions.</p>
+                            {{ $editingRole ? __('Edit Role: ') . $editingRole->name : __('Create New Role') }}</h3>
+                        <p class="text-sm text-slate-500">{{ __('Configure core details and granular access permissions.') }}</p>
                     </div>
 
                     <form wire:submit="saveRole" class="p-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">Role Name</label>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">{{ __('Role Name') }}</label>
                                 <input wire:model="newRoleName" type="text"
                                     class="w-full px-4 py-2 bg-slate-50 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary"
                                     required {{ $editingRole && $editingRole->name === 'Admin' ? 'disabled' : '' }}>
                                 @error('newRoleName') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">Description</label>
+                                <label class="block text-sm font-bold text-slate-700 mb-2">{{ __('Description') }}</label>
                                 <input wire:model="newRoleDescription" type="text"
                                     class="w-full px-4 py-2 bg-slate-50 border-slate-200 rounded-lg focus:ring-2 focus:ring-primary">
                             </div>
                         </div>
 
-                        <h4 class="font-bold text-slate-900 mb-4 border-b border-slate-100 pb-2">Permission Configuration
-                        </h4>
+                        <h4 class="font-bold text-slate-900 mb-4 border-b border-slate-100 pb-2">{{ __('Permission Configuration') }}</h4>
 
                         <div class="space-y-6">
                             @foreach($groupedPermissions as $group => $perms)
@@ -200,7 +197,7 @@ new class extends Component {
                                     <h5
                                         class="text-sm font-bold text-slate-700 uppercase tracking-widest mb-4 flex items-center gap-2">
                                         <span class="material-symbols-outlined text-sm text-primary">folder_open</span>
-                                        {{ $group ?: 'System' }}
+                                        {{ $group ?: __('System') }}
                                     </h5>
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -225,10 +222,9 @@ new class extends Component {
 
                         <div class="mt-8 pt-6 border-t border-slate-200 flex justify-end gap-3">
                             <button type="button" wire:click="$set('isCreateModalOpen', false)"
-                                class="px-6 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors">Cancel</button>
+                                class="px-6 py-2 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors">{{ __('Cancel') }}</button>
                             <button type="submit"
-                                class="px-6 py-2 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">Save
-                                Role</button>
+                                class="px-6 py-2 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">{{ __('Save Role') }}</button>
                         </div>
                     </form>
                 </div>
@@ -236,9 +232,8 @@ new class extends Component {
                 <div
                     class="bg-slate-50 border border-slate-200 border-dashed rounded-2xl h-full min-h-[400px] flex flex-col items-center justify-center p-8 text-center text-slate-400">
                     <span class="material-symbols-outlined text-6xl mb-4 text-slate-300">security</span>
-                    <h3 class="text-xl font-bold text-slate-600 mb-2">Select a Role to Edit</h3>
-                    <p class="max-w-md">Click on any role from the sidebar to view its configured permissions, or create a
-                        brand new custom role to tailor access for your team.</p>
+                    <h3 class="text-xl font-bold text-slate-600 mb-2">{{ __('Select a Role to Edit') }}</h3>
+                    <p class="max-w-md">{{ __('Click on any role from the sidebar to view its configured permissions, or create a brand new custom role to tailor access for your team.') }}</p>
                 </div>
             @endif
         </div>
