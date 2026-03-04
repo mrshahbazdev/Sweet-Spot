@@ -12,23 +12,51 @@ new class extends Component {
 
     public $search = '';
     public $isInviteModalOpen = false;
+    public $activeTab = 'all';
 
     public $inviteEmail = '';
     public $inviteRole = '';
 
+    public $isEditModalOpen = false;
+    public $editingUserId = null;
+    public $editName = '';
+    public $editEmail = '';
+    public $editRole = '';
+
+    public $isDeleteModalOpen = false;
+    public $userToDelete = null;
+
     public function with()
     {
+        $userId = auth()->id();
+
+        $baseQuery = User::where(function ($q) use ($userId) {
+            $q->where('id', $userId)->orWhere('parent_id', $userId);
+        });
+
+        $query = clone $baseQuery;
+
+        if ($this->activeTab === 'admins') {
+            $query->whereHas('roles', function ($q) {
+                $q->where('name', 'Admin');
+            });
+        }
+
         return [
-            'members' => User::with('roles')
-                ->where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('email', 'like', '%' . $this->search . '%')
+            'members' => $query->with('roles')
+                ->where(function ($q) {
+                    $q->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('email', 'like', '%' . $this->search . '%');
+                })
                 ->paginate(10),
             'availableRoles' => Role::all(),
-            'totalMembers' => User::count(),
-            'adminsCount' => User::whereHas('roles', function ($q) {
-                $q->where('name', 'Admin'); })->count(),
-            'viewersCount' => User::whereHas('roles', function ($q) {
-                $q->where('name', 'Viewer'); })->count(),
+            'totalMembers' => (clone $baseQuery)->count(),
+            'adminsCount' => (clone $baseQuery)->whereHas('roles', function ($q) {
+                $q->where('name', 'Admin');
+            })->count(),
+            'viewersCount' => (clone $baseQuery)->whereHas('roles', function ($q) {
+                $q->where('name', 'Viewer');
+            })->count(),
         ];
     }
 
@@ -40,6 +68,7 @@ new class extends Component {
         ]);
 
         $user = User::create([
+            'parent_id' => auth()->id(),
             'name' => explode('@', $this->inviteEmail)[0],
             'email' => $this->inviteEmail,
             'password' => Hash::make(Str::random(12)), // Random password initially
@@ -53,12 +82,62 @@ new class extends Component {
         $this->reset(['inviteEmail', 'inviteRole', 'isInviteModalOpen']);
     }
 
-    public function deleteMember($id)
+    public function openEditModal($id)
     {
-        if (auth()->id() !== $id) { // Prevent self-deletion
-            User::findOrFail($id)->delete();
-            session()->flash('message', 'Member removed.');
+        $user = User::findOrFail($id);
+
+        if ($user->id !== auth()->id() && $user->parent_id !== auth()->id()) {
+            return;
         }
+
+        $this->editingUserId = $user->id;
+        $this->editName = $user->name;
+        $this->editEmail = $user->email;
+        $this->editRole = $user->roles->first()->id ?? '';
+        $this->isEditModalOpen = true;
+    }
+
+    public function updateMember()
+    {
+        $this->validate([
+            'editName' => 'required|string|max:255',
+            'editEmail' => 'required|email|unique:users,email,' . $this->editingUserId,
+            'editRole' => 'required|exists:roles,id',
+        ]);
+
+        $user = User::findOrFail($this->editingUserId);
+        if ($user->id !== auth()->id() && $user->parent_id !== auth()->id()) {
+            return;
+        }
+
+        $user->update([
+            'name' => $this->editName,
+            'email' => $this->editEmail,
+        ]);
+
+        $user->roles()->sync([$this->editRole]);
+
+        session()->flash('message', 'Member updated successfully.');
+        $this->reset(['isEditModalOpen', 'editingUserId', 'editName', 'editEmail', 'editRole']);
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->userToDelete = $id;
+        $this->isDeleteModalOpen = true;
+    }
+
+    public function deleteMember()
+    {
+        if ($this->userToDelete && auth()->id() !== $this->userToDelete) {
+            $user = User::findOrFail($this->userToDelete);
+            if ($user->parent_id === auth()->id()) {
+                $user->delete();
+                session()->flash('message', 'Member removed.');
+            }
+        }
+        $this->isDeleteModalOpen = false;
+        $this->userToDelete = null;
     }
 };
 ?>
@@ -128,11 +207,11 @@ new class extends Component {
     <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
         <div class="p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div class="flex items-center gap-4 overflow-x-auto pb-2 md:pb-0">
-                <button
-                    class="px-4 py-2 bg-primary/10 text-primary text-sm font-bold rounded-full whitespace-nowrap">All
+                <button wire:click="$set('activeTab', 'all')"
+                    class="px-4 py-2 {{ $activeTab === 'all' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:bg-slate-100' }} text-sm font-bold rounded-full whitespace-nowrap transition-colors">All
                     Members</button>
-                <button
-                    class="px-4 py-2 text-slate-500 hover:bg-slate-100 text-sm font-bold rounded-full transition-colors whitespace-nowrap">Admins</button>
+                <button wire:click="$set('activeTab', 'admins')"
+                    class="px-4 py-2 {{ $activeTab === 'admins' ? 'bg-primary/10 text-primary' : 'text-slate-500 hover:bg-slate-100' }} text-sm font-bold rounded-full transition-colors whitespace-nowrap">Admins</button>
             </div>
             <div class="relative min-w-[300px]">
                 <span
@@ -187,12 +266,12 @@ new class extends Component {
                             </td>
                             <td class="px-6 py-4 text-sm text-slate-500">{{ $member->created_at->diffForHumans() }}</td>
                             <td class="px-6 py-4 text-right">
-                                <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                <button wire:click="openEditModal({{ $member->id }})"
+                                    class="p-2 text-slate-400 hover:text-primary transition-colors">
                                     <span class="material-symbols-outlined text-xl">edit</span>
                                 </button>
                                 @if(auth()->id() !== $member->id)
-                                    <button wire:click="deleteMember({{ $member->id }})"
-                                        wire:confirm="Are you sure you want to remove this member?"
+                                    <button wire:click="confirmDelete({{ $member->id }})"
                                         class="p-2 text-slate-400 hover:text-red-500 transition-colors">
                                         <span class="material-symbols-outlined text-xl">delete</span>
                                     </button>
@@ -216,53 +295,135 @@ new class extends Component {
 
     <!-- Invite Member Modal -->
     @if($isInviteModalOpen)
-        <div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
-            <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-8 border border-slate-200">
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900 tracking-tight">Invite Member</h3>
-                        <p class="text-sm text-slate-500">Send an invitation to join your team.</p>
-                    </div>
-                    <button wire:click="$set('isInviteModalOpen', false)"
-                        class="p-2 hover:bg-slate-100 rounded-full transition-colors">
-                        <span class="material-symbols-outlined">close</span>
-                    </button>
-                </div>
-
-                <form wire:submit="sendInvite" class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
-                        <input wire:model="inviteEmail"
-                            class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                            placeholder="colleague@company.com" type="email" required />
-                        @error('inviteEmail') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Assign Role</label>
-                        <select wire:model="inviteRole"
-                            class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                            required>
-                            <option value="">Select a role...</option>
-                            @foreach($availableRoles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('inviteRole') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-slate-300">
-                        <p class="text-xs text-slate-500">Members will receive an email invitation to create an account and
-                            join this workspace.</p>
-                    </div>
-                    <div class="flex gap-3 pt-2">
+            <div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+                <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-8 border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-black text-slate-900 tracking-tight">Invite Member</h3>
+                            <p class="text-sm text-slate-500">Send an invitation to join your team.</p>
+                        </div>
                         <button wire:click="$set('isInviteModalOpen', false)"
-                            class="flex-1 py-3 px-4 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
-                            type="button">Cancel</button>
-                        <button
-                            class="flex-1 py-3 px-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
-                            type="submit">Send Invite</button>
+                            class="p-2 hover:bg-slate-100 rounded-full transition-colors">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
                     </div>
-                </form>
+
+                    <form wire:submit="sendInvite" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
+                            <input wire:model="inviteEmail"
+                                class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                placeholder="colleague@company.com" type="email" required />
+                            @error('inviteEmail') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Assign Role</label>
+                            <select wire:model="inviteRole"
+                                class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                required>
+                                <option value="">Select a role...</option>
+                                @foreach($availableRoles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('inviteRole') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-dashed border-slate-300">
+                            <p class="text-xs text-slate-500">Members will receive an email invitation to create an account and
+                                join this workspace.</p>
+                        </div>
+                        <div class="flex gap-3 pt-2">
+                            <button wire:click="$set('isInviteModalOpen', false)"
+                                class="flex-1 py-3 px-4 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
+                                type="button">Cancel</button>
+                            <button
+                                class="flex-1 py-3 px-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                                type="submit">Send Invite</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        </div>
     @endif
+
+<!-- Edit Member Modal -->
+@if($isEditModalOpen)
+    <div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-8 border border-slate-200">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h3 class="text-2xl font-black text-slate-900 tracking-tight">Edit Member</h3>
+                    <p class="text-sm text-slate-500">Modify member details and access level.</p>
+                </div>
+                <button wire:click="$set('isEditModalOpen', false)"
+                    class="p-2 hover:bg-slate-100 rounded-full transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form wire:submit="updateMember" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Name</label>
+                    <input wire:model="editName"
+                        class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        type="text" required />
+                    @error('editName') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
+                    <input wire:model="editEmail"
+                        class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        type="email" required />
+                    @error('editEmail') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Update Role</label>
+                    <select wire:model="editRole"
+                        class="w-full px-4 py-3 bg-slate-50 border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        required>
+                        <option value="">Select a role...</option>
+                        @foreach($availableRoles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('editRole') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button wire:click="$set('isEditModalOpen', false)"
+                        class="flex-1 py-3 px-4 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
+                        type="button">Cancel</button>
+                    <button
+                        class="flex-1 py-3 px-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                        type="submit">Update Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+@endif
+
+<!-- Delete Modal -->
+@if($isDeleteModalOpen)
+    <div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-8 border border-slate-200">
+            <div class="flex flex-col items-center text-center">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-500 mb-4">
+                    <span class="material-symbols-outlined text-3xl">delete_forever</span>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Remove Member?</h3>
+                <p class="text-slate-500 mb-8">This will immediately revoke their access to your workspace. This action
+                    cannot be undone.</p>
+
+                <div class="flex gap-3 w-full">
+                    <button wire:click="$set('isDeleteModalOpen', false)"
+                        class="flex-1 py-3 px-4 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-colors"
+                        type="button">Cancel</button>
+                    <button wire:click="deleteMember"
+                        class="flex-1 py-3 px-4 bg-red-500 text-white font-bold rounded-xl hover:bg-red-600 transition-all shadow-lg shadow-red-500/20"
+                        type="button">Yes, Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 </div>
