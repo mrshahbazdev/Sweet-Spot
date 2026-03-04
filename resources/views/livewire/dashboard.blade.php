@@ -18,11 +18,16 @@ new class extends Component {
             ->take(10)
             ->get();
 
+        $allScores = CustomerScore::with('customer')
+            ->whereHas('customer')
+            ->get();
+
         return [
             'totalCustomers' => $totalCustomers,
             'averageScore' => round($averageScore, 1),
             'topPercent' => round($topPercent, 1),
             'topCustomers' => $topCustomers,
+            'allScores' => $allScores,
             'totalRevenue' => Customer::sum('revenue') ?? 0,
         ];
     }
@@ -96,7 +101,7 @@ new class extends Component {
                 <div class="absolute inset-0">
                     <!-- Example Bubbles representing Customers -->
                     <!-- In a real dynamic scenario, these could be looped over topCustomers -->
-                    @foreach($topCustomers as $index => $score)
+                    @foreach($allScores as $index => $score)
                         @php
                             // Determine relative position based on Effort (X) and Profitability (Y)
                             // Lower effort = left side (0-50%), Higher profitability = top side (0-50%)
@@ -104,13 +109,18 @@ new class extends Component {
                             $profitScale = min(max(($score->customer->profit_margin_eur ?? 500) / 1000 * 100, 5), 95); // Example scaling
                             $xPos = $effortScale;
                             $yPos = 100 - $profitScale;
-                            $sizeClasses = $score->top_flag ? 'size-12 bg-primary/40 border-primary animate-pulse' : 'size-6 bg-slate-400/20 border-slate-400/40';
+                            $sizeClasses = $score->top_flag ? 'size-12 bg-primary/40 border-primary animate-pulse' : 'size-6 bg-slate-400/20 border-slate-400/40 opacity-60 hover:opacity-100 z-10 hover:z-20';
                         @endphp
-                        <div class="absolute rounded-full border-2 flex items-center justify-center text-[10px] font-bold group"
-                            style="top: {{ $yPos }}%; left: {{ $xPos }}%;" class="{{ $sizeClasses }}">
+                        <div class="absolute rounded-full border-2 flex items-center justify-center text-[10px] font-bold group {{ $sizeClasses }}"
+                            style="top: {{ $yPos }}%; left: {{ $xPos }}%;">
                             @if($score->top_flag)
                                 <span
-                                    class="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-800 text-white px-2 py-1 rounded text-xs whitespace-nowrap transition-opacity">
+                                    class="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-800 text-white px-2 py-1 rounded text-xs whitespace-nowrap transition-opacity z-50">
+                                    {{ $score->customer->name }} (Top)
+                                </span>
+                            @else
+                                <span
+                                    class="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-600 text-white px-2 py-1 rounded text-xs whitespace-nowrap transition-opacity z-50">
                                     {{ $score->customer->name }}
                                 </span>
                             @endif
