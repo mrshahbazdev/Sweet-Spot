@@ -10,6 +10,8 @@ new class extends Component {
     public $search = '';
     public $isModalOpen = false;
     public $editingId = null;
+    public $isDeleteModalOpen = false;
+    public $customerToDelete = null;
 
     public $name = '';
     public $industry = '';
@@ -36,10 +38,20 @@ new class extends Component {
         $this->isModalOpen = true;
     }
 
-    public function delete($id)
+    public function confirmDelete($id)
     {
-        Customer::findOrFail($id)->delete();
-        session()->flash('message', 'Customer deleted successfully.');
+        $this->customerToDelete = $id;
+        $this->isDeleteModalOpen = true;
+    }
+
+    public function delete()
+    {
+        if ($this->customerToDelete) {
+            Customer::findOrFail($this->customerToDelete)->delete();
+            session()->flash('message', 'Customer deleted successfully.');
+            $this->isDeleteModalOpen = false;
+            $this->customerToDelete = null;
+        }
     }
 
     public function save()
@@ -146,9 +158,9 @@ new class extends Component {
                                     class="text-slate-500 hover:text-blue-500 transition" title="Edit">
                                     <span class="material-symbols-outlined text-sm">edit</span>
                                 </button>
-                                <button wire:click="delete({{ $customer->id }})"
+                                <button wire:click="confirmDelete({{ $customer->id }})"
                                     class="text-slate-500 hover:text-red-500 transition"
-                                    wire:confirm="Are you sure you want to delete this customer?" title="Delete">
+                                    title="Delete">
                                     <span class="material-symbols-outlined text-sm">delete</span>
                                 </button>
                             </td>
@@ -229,6 +241,46 @@ new class extends Component {
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Modal for Deleting Customer -->
+    @if($isDeleteModalOpen)
+        <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                    wire:click="$set('isDeleteModalOpen', false)"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-100">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <span class="material-symbols-outlined text-red-600">warning</span>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                    {{ __('Delete Customer') }}
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        {{ __('Are you sure you want to delete this customer? All of their data will be permanently removed. This action cannot be undone.') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-end gap-3">
+                        <button type="button" wire:click="$set('isDeleteModalOpen', false)"
+                            class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:w-auto sm:text-sm">
+                            Cancel
+                        </button>
+                        <button type="button" wire:click="delete"
+                            class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
