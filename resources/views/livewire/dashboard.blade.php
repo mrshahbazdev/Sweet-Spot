@@ -13,6 +13,7 @@ new class extends Component {
         $topPercent = $totalCustomers > 0 ? ($topCustomersCount / $totalCustomers) * 100 : 0;
 
         $topCustomers = CustomerScore::with('customer')
+            ->whereHas('customer')
             ->orderByDesc('total_score')
             ->take(10)
             ->get();
@@ -68,7 +69,8 @@ new class extends Component {
                     <p class="text-sm text-slate-500">{{ __('Resource allocation efficiency') }}</p>
                 </div>
                 <div class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">
-                    {{ __('OPTIMAL GROWTH ZONE') }}</div>
+                    {{ __('OPTIMAL GROWTH ZONE') }}
+                </div>
             </div>
             <div class="relative flex-1 min-h-[400px] border-l border-b border-slate-300 dark:border-slate-700 m-8">
                 <!-- Effort Axis Label -->

@@ -41,6 +41,13 @@ class Customer extends Model
                 $customer->user_id = auth()->id();
             }
         });
+
+        // Automatically delete the associated score when a customer is deleted
+        static::deleting(function ($customer) {
+            if ($customer->score) {
+                $customer->score()->delete();
+            }
+        });
     }
 
     public function user()
