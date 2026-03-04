@@ -19,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $appUrl = config('app.url');
+        if (!empty($appUrl) && $appUrl !== 'http://localhost') {
+            \Illuminate\Support\Facades\URL::forceRootUrl($appUrl);
+            if (\Illuminate\Support\Str::startsWith($appUrl, 'https://')) {
+                \Illuminate\Support\Facades\URL::forceScheme('https');
+            }
+        }
     }
 }
