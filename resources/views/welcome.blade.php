@@ -42,12 +42,16 @@
                     <div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
                         <span class="material-symbols-outlined text-white text-xl">insights</span>
                     </div>
-                    <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ __('Sweet Spot') }}</span>
+                    <span
+                        class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ __('Sweet Spot') }}</span>
                 </div>
                 <nav class="hidden md:flex items-center gap-8">
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#features">{{ __('Features') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#pricing">{{ __('Pricing') }}</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#about">{{ __('About') }}</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="#features">{{ __('Features') }}</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="#pricing">{{ __('Pricing') }}</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="#about">{{ __('About') }}</a>
                     <select onchange="window.location.href=this.value"
                         class="bg-transparent border-none text-sm font-medium focus:ring-0 cursor-pointer">
                         <option value="{{ route('language.switch', 'en') }}" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>EN</option>
@@ -69,7 +73,7 @@
                             href="{{ route('login') }}">{{ __('Login') }}</a>
                         <a href="{{ route('register') }}"
                             class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-xl text-sm font-bold transition-all shadow-sm">
-                           {{ __('Get Started') }}
+                            {{ __('Get Started') }}
                         </a>
                     @endauth
                 </nav>
@@ -95,7 +99,8 @@
                     </div>
                     <h1
                         class="text-5xl lg:text-7xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">
-                       {{ __('Identify Your Most') }} <span class="text-primary">{{ __('Profitable') }}</span> Customers
+                        {{ __('Identify Your Most') }} <span class="text-primary">{{ __('Profitable') }}</span>
+                        Customers
                     </h1>
                     <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
                         Sweet Spot's weighted scoring engine turns raw data into actionable insights, helping you focus
@@ -400,7 +405,8 @@
             </div>
             <div
                 class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-400">© 2024 Sweet Spot Intelligence. All rights reserved.</p>
+                <p class="text-xs text-slate-400">&copy; {{ date('Y') }} Sweet Spot Intelligence. All rights reserved.
+                </p>
                 <p class="text-xs text-slate-400">Handcrafted for elite agencies.</p>
             </div>
         </div>
